@@ -1,0 +1,105 @@
+# NextFluent · Inglês sem Fronteiras
+
+> Free, complete English course written in Portuguese for Brazilian learners, organized by CEFR level (A1 to C2, the full official scale). Each lesson has a grammar explanation, vocabulary, a model dialogue, exercises, and an answer key. A dedicated track covers professional/workplace English (resumes, interviews, meetings, negotiation).
+
+This site is a static collection of Markdown lessons hosted on GitHub Pages. All explanations are in Portuguese; examples, dialogues, and exercises are in English. Content is organized into 6 CEFR levels (A1, A2, B1, B2, C1, C2) plus one extra module focused on English for the job market. Source repository: https://github.com/Vaz2984/curso-English
+
+## Start here
+
+- [README](https://vaz2984.github.io/curso-English/README.md): Course overview, full structure, and navigation.
+- [Guia de Estudos](https://vaz2984.github.io/curso-English/GUIA-DE-ESTUDOS.md): Suggested pace, daily routine, and level-advancement criteria.
+- [Cadastro Setup](https://vaz2984.github.io/curso-English/CADASTRO-SETUP.md): Optional Supabase-backed student accounts (sign-up, cross-device progress, admin dashboard) and how to turn them on.
+
+## A1: Iniciante (Beginner)
+
+- [Visão geral do nível A1](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/00-visao-geral.md)
+- [Saudações e verbo to be](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/01-saudacoes-e-verbo-to-be.md)
+- [Artigos, plural e números](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/02-artigos-plural-numeros.md)
+- [Presente simples](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/03-presente-simples.md)
+- [There is/there are e preposições](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/04-there-is-there-are-preposicoes.md)
+- [Can, possessivos e comida](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/05-can-possessivos-comida.md)
+- [Presente contínuo e horas](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/06-presente-continuo-horas.md)
+- [Perguntas com Wh- e conversação](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/07-perguntas-wh-conversacao.md)
+- [Revisão final A1](https://vaz2984.github.io/curso-English/niveis/A1-iniciante/08-revisao-final.md)
+
+## A2: Elementar
+
+- [Passado simples](https://vaz2984.github.io/curso-English/niveis/A2-elementar/01-passado-simples.md)
+- [Passado contínuo e comparativos](https://vaz2984.github.io/curso-English/niveis/A2-elementar/02-passado-continuo-comparativos.md)
+- [Futuro: will e going to](https://vaz2984.github.io/curso-English/niveis/A2-elementar/03-futuro-will-going-to.md)
+- [Modais: must, should, have to](https://vaz2984.github.io/curso-English/niveis/A2-elementar/04-modais-must-should-have-to.md)
+- [Quantificadores e substantivos](https://vaz2984.github.io/curso-English/niveis/A2-elementar/05-quantificadores-substantivos.md)
+- [Preposições e phrasal verbs](https://vaz2984.github.io/curso-English/niveis/A2-elementar/06-preposicoes-phrasal-verbs.md)
+- [Vocabulário: viagem e trabalho](https://vaz2984.github.io/curso-English/niveis/A2-elementar/07-vocabulario-viagem-trabalho.md)
+- [Revisão final A2](https://vaz2984.github.io/curso-English/niveis/A2-elementar/08-revisao-final.md)
+
+## B1: Intermediário
+
+- [Present perfect](https://vaz2984.github.io/curso-English/niveis/B1-intermediario/01-present-perfect.md)
+- [Present perfect continuous e past perfect](https://vaz2984.github.io/curso-English/niveis/B1-intermediario/02-present-perfect-continuous-past-perfect.md)
+- [Condicionais 1 e 2](https://vaz2984.github.io/curso-English/niveis/B1-intermediario/03-condicionais-1-2.md)
+- [Voz passiva](https://vaz2984.github.io/curso-English/niveis/B1-intermediario/04-voz-passiva.md)
+- [Discurso indireto](https://vaz2984.github.io/curso-English/niveis/B1-intermediario/05-discurso-indireto.md)
+- [Modais de dedução e phrasal verbs](https://vaz2984.github.io/curso-English/niveis/B1-intermediario/06-modais-deducao-phrasal-verbs.md)
+- [Vocabulário: saúde, negócios, meio ambiente](https://vaz2984.github.io/curso-English/niveis/B1-intermediario/07-vocabulario-saude-negocios-meio-ambiente.md)
+- [Revisão final B1](https://vaz2984.github.io/curso-English/niveis/B1-intermediario/08-revisao-final.md)
+
+## B2: Intermediário Superior
+
+- [Condicionais 3 e mistos](https://vaz2984.github.io/curso-English/niveis/B2-intermediario-superior/01-condicionais-3-mistos.md)
+- [Tempos perfeitos contínuos e used to](https://vaz2984.github.io/curso-English/niveis/B2-intermediario-superior/02-tempos-perfeitos-continuos-used-to.md)
+- [Voz passiva avançada](https://vaz2984.github.io/curso-English/niveis/B2-intermediario-superior/03-voz-passiva-avancada.md)
+- [Orações relativas e discurso indireto avançado](https://vaz2984.github.io/curso-English/niveis/B2-intermediario-superior/04-oracoes-relativas-discurso-indireto-avancado.md)
+- [Gerúndio, infinitivo e modais avançados](https://vaz2984.github.io/curso-English/niveis/B2-intermediario-superior/05-gerundio-infinitivo-modais-avancados.md)
+- [Phrasal verbs, idiomas e collocations](https://vaz2984.github.io/curso-English/niveis/B2-intermediario-superior/06-phrasal-verbs-idiomas-collocations.md)
+- [Vocabulário acadêmico, tecnologia e mídia](https://vaz2984.github.io/curso-English/niveis/B2-intermediario-superior/07-vocabulario-academico-tecnologia-midia.md)
+- [Revisão final B2](https://vaz2984.github.io/curso-English/niveis/B2-intermediario-superior/08-revisao-final.md)
+
+## C1: Avançado
+
+- [Inversão e ênfase](https://vaz2984.github.io/curso-English/niveis/C1-avancado/01-inversao-enfase.md)
+- [Subjuntivo e estruturas especiais](https://vaz2984.github.io/curso-English/niveis/C1-avancado/02-subjuntivo-cleft-sentences.md)
+- [Collocations e expressões idiomáticas](https://vaz2984.github.io/curso-English/niveis/C1-avancado/03-collocations-expressoes-idiomaticas.md)
+- [Nuances de vocabulário e escrita acadêmica](https://vaz2984.github.io/curso-English/niveis/C1-avancado/04-nuances-vocabulario-escrita-academica.md)
+- [Inglês de negócios e correspondência formal](https://vaz2984.github.io/curso-English/niveis/C1-avancado/05-ingles-de-negocios-correspondencia-formal.md)
+- [Conectivos avançados e hedging](https://vaz2984.github.io/curso-English/niveis/C1-avancado/06-conectivos-avancados-hedging.md)
+- [Preparação para TOEFL e IELTS](https://vaz2984.github.io/curso-English/niveis/C1-avancado/07-preparacao-toefl-ielts.md)
+- [Revisão final C1](https://vaz2984.github.io/curso-English/niveis/C1-avancado/08-revisao-final.md)
+
+## C2: Proficiência (Mastery, the top of the CEFR scale)
+
+- [Visão geral do nível C2](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/00-visao-geral.md)
+- [Estruturas elípticas e construções absolutas](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/01-estruturas-elipticas-e-absolutas.md)
+- [Nominalização e estilo formal extremo](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/02-nominalizacao-e-estilo-formal-extremo.md)
+- [Retórica, persuasão e recursos estilísticos](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/03-retorica-persuasao-e-recursos-estilisticos.md)
+- [Humor, ironia e jogos de palavras](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/04-humor-ironia-e-jogos-de-palavras.md)
+- [Variedades do inglês e registro](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/05-variedades-do-ingles-e-registro.md)
+- [Coesão textual e estrutura informacional](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/06-coesao-textual-e-estrutura-informacional.md)
+- [Nuance, conotação e tradução literária](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/07-nuance-conotacao-e-traducao-literaria.md)
+- [Revisão final C2](https://vaz2984.github.io/curso-English/niveis/C2-proficiencia/08-revisao-final.md)
+
+## Inglês para o Mercado de Trabalho (módulo extra, a partir do B1)
+
+- [Visão geral do módulo](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/00-visao-geral.md)
+- [Currículo e carta de apresentação](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/01-curriculo-cv-carta-apresentacao.md)
+- [Entrevista de emprego](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/02-entrevista-de-emprego.md)
+- [E-mails profissionais](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/03-emails-profissionais.md)
+- [Reuniões e apresentações](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/04-reunioes-e-apresentacoes.md)
+- [Small talk e networking](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/05-small-talk-e-networking.md)
+- [Telefonemas e videochamadas](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/06-telefonemas-e-videochamadas.md)
+- [Negociação e feedback](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/07-negociacao-e-feedback.md)
+- [LinkedIn e marca pessoal](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/08-linkedin-e-marca-pessoal.md)
+- [Vocabulário por área](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/09-vocabulario-por-area.md)
+- [Comunicação intercultural e etiqueta](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/10-comunicacao-intercultural-etiqueta.md)
+- [Simulado final](https://vaz2984.github.io/curso-English/ingles-mercado-de-trabalho/11-simulado-final-revisao.md)
+
+## Recursos (reference material)
+
+- [Glossário gramatical](https://vaz2984.github.io/curso-English/recursos/glossario-gramatical.md)
+- [Lista de verbos irregulares](https://vaz2984.github.io/curso-English/recursos/verbos-irregulares.md)
+- [Falsos cognatos](https://vaz2984.github.io/curso-English/recursos/falsos-cognatos.md)
+- [Recursos complementares](https://vaz2984.github.io/curso-English/recursos/recursos-complementares.md)
+
+## Repository
+
+- [Repository](https://github.com/Vaz2984/curso-English): Full source, issue tracker, and revision history.

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vaz2984.github.io/curso-English/sitemap.xml

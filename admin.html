@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel de alunos · NextFluent</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/brand/mark-badge.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/favicon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><img class="brand-mark" src="assets/brand/mark.svg" width="24" height="24" alt=""><span>NextFluent</span></a>
+    <span class="stampbadge">Painel de alunos</span>
+    <span id="nf-auth-slot" class="auth-slot" data-root=""></span>
+  </div>
+</div>
+
+<main class="page">
+  <div class="admin-wrap" id="admin-mount">
+    <p style="color:var(--muted)">Carregando…</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div style="font-weight:700; margin-bottom:12px">NextFluent · Inglês sem Fronteiras</div>
+    <div class="links">
+      <a href="index.html">Início</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/auth.js"></script>
+<script>
+  (function () {
+    var mount = document.getElementById("admin-mount");
+
+    function escapeHtml(str) {
+      var div = document.createElement("div");
+      div.textContent = str == null ? "" : String(str);
+      return div.innerHTML;
+    }
+
+    function formatDate(ts) {
+      if (!ts) return "-";
+      var d = ts.toDate ? ts.toDate() : new Date(ts);
+      if (isNaN(d.getTime())) return typeof ts === "string" ? ts : "-";
+      return d.toLocaleDateString("pt-BR");
+    }
+
+    function csvEscape(value) {
+      var s = value == null ? "" : String(value);
+      if (/[",\n;]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+      return s;
+    }
+
+    function downloadCsv(rows) {
+      var header = ["Nome", "E-mail", "Telefone", "Cadastro em", "Aulas concluídas", "Total de aulas", "Progresso (%)", "Certificado em"];
+      var lines = [header.map(csvEscape).join(";")];
+      rows.forEach(function (r) {
+        lines.push(
+          [r.name, r.email, r.phone, r.createdAtLabel, r.completedCount, r.totalLessons, r.pct, r.certLabel]
+            .map(csvEscape)
+            .join(";")
+        );
+      });
+      var blob = new Blob(["﻿" + lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "nextfluent-alunos.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function renderDenied(message) {
+      mount.innerHTML =
+        '<div class="cert-pending"><div class="eyebrow">Acesso restrito</div><h2>' +
+        escapeHtml(message) +
+        "</h2></div>";
+    }
+
+    function renderNotConfigured() {
+      mount.innerHTML =
+        '<div class="cert-pending"><div class="eyebrow">Painel de alunos</div>' +
+        "<h2>A área de cadastro ainda não foi configurada</h2>" +
+        '<p class="cert-pending-count">Preencha assets/supabase-config.js com os dados do seu projeto Supabase ' +
+        "para ativar o cadastro de alunos e este painel (veja as instruções nos comentários desse arquivo).</p></div>";
+    }
+
+    function renderTable(students) {
+      var rows = students.map(function (s) {
+        var total = s.totalLessons || 0;
+        var done = s.completedCount || 0;
+        var pct = total > 0 ? Math.round((done / total) * 100) : 0;
+        return {
+          name: s.name || "(sem nome)",
+          email: s.email || "",
+          phone: s.phone || "",
+          createdAtLabel: formatDate(s.createdAt),
+          completedCount: done,
+          totalLessons: total,
+          pct: pct,
+          certLabel: s.certificateDate ? s.certificateDate : "",
+        };
+      });
+
+      var totalStudents = rows.length;
+      var finished = rows.filter(function (r) { return r.certLabel; }).length;
+      var avgPct = totalStudents
+        ? Math.round(rows.reduce(function (acc, r) { return acc + r.pct; }, 0) / totalStudents)
+        : 0;
+
+      var rowsHtml = rows
+        .sort(function (a, b) { return b.pct - a.pct; })
+        .map(function (r) {
+          return (
+            "<tr><td>" +
+            escapeHtml(r.name) +
+            "</td><td>" +
+            escapeHtml(r.email) +
+            "</td><td>" +
+            (r.phone ? escapeHtml(r.phone) : "-") +
+            "</td><td>" +
+            escapeHtml(r.createdAtLabel) +
+            "</td><td><span class=\"pct-bar\"><span class=\"pct-fill\" style=\"width:" +
+            r.pct +
+            '%"></span></span>' +
+            r.completedCount +
+            "/" +
+            r.totalLessons +
+            " (" +
+            r.pct +
+            "%)</td><td>" +
+            (r.certLabel ? escapeHtml(r.certLabel) : "-") +
+            "</td></tr>"
+          );
+        })
+        .join("");
+
+      mount.innerHTML =
+        '<div class="admin-stats">' +
+        '<div class="admin-stat"><div class="k">Alunos cadastrados</div><div class="v">' + totalStudents + "</div></div>" +
+        '<div class="admin-stat"><div class="k">Certificados emitidos</div><div class="v">' + finished + "</div></div>" +
+        '<div class="admin-stat"><div class="k">Progresso médio</div><div class="v">' + avgPct + "%</div></div>" +
+        "</div>" +
+        '<div class="admin-toolbar"><h2 style="margin:0; font-family:var(--font-display)">Alunos</h2>' +
+        '<button type="button" class="seal-btn outline-ink" id="csv-btn">Baixar CSV →</button></div>' +
+        '<div class="admin-table-wrap"><table class="admin-table"><thead><tr>' +
+        "<th>Nome</th><th>E-mail</th><th>Telefone</th><th>Cadastro</th><th>Progresso</th><th>Certificado</th>" +
+        "</tr></thead><tbody>" +
+        (rowsHtml || '<tr><td colspan="6" style="color:var(--muted)">Ninguém se cadastrou ainda.</td></tr>') +
+        "</tbody></table></div>";
+
+      var csvBtn = document.getElementById("csv-btn");
+      if (csvBtn) csvBtn.addEventListener("click", function () { downloadCsv(rows); });
+    }
+
+    function loadStudents() {
+      window.NFAuth.listAllStudents()
+        .then(function (students) {
+          renderTable(students);
+        })
+        .catch(function (err) {
+          renderDenied("Não foi possível carregar a lista (" + err.message + ").");
+        });
+    }
+
+    if (!window.NFAuth || !window.NFAuth.isConfigured()) {
+      renderNotConfigured();
+      return;
+    }
+
+    window.NFAuth.onChange(function (user) {
+      if (!user) {
+        window.location.href = "login.html?next=" + encodeURIComponent("admin.html");
+        return;
+      }
+      if (!window.NFAuth.isAdmin(user)) {
+        renderDenied("Sua conta (" + user.email + ") não tem acesso a este painel.");
+        return;
+      }
+      loadStudents();
+    });
+  })();
+</script>
+</body>
+</html>

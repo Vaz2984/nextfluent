@@ -1,0 +1,807 @@
+/* ============================================================
+   Curso de Inglês — sistema visual "Passaporte para a Fluência"
+   Tipografia: Fraunces (display) · Public Sans (leitura) · Space Mono (selos/MRZ)
+   ============================================================ */
+
+@font-face{
+  font-family:"Fraunces Var";
+  src:url("fonts/fraunces-variable.woff2") format("woff2");
+  font-weight:300 900;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Public Sans Var";
+  src:url("fonts/publicsans-variable.woff2") format("woff2");
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Space Mono";
+  src:url("fonts/spacemono-regular.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Space Mono";
+  src:url("fonts/spacemono-bold.woff2") format("woff2");
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  /* --- paper & ink (light) --- */
+  --bg:          #eeece2;
+  --surface:     #fbfaf4;
+  --surface-2:   #f3f1e6;
+  --ink:         #16241c;
+  --ink-soft:    #3d473e;
+  --muted:       #6b7266;
+  --border:      #dcd6c2;
+  --border-soft: #e7e2d1;
+
+  /* --- cover (deep passport green) & foil gold --- */
+  --cover:       #0f3d2e;
+  --cover-ink:   #f1eedd;
+  --cover-soft:  #d9dcc9;
+  --gold:        #a9791f;
+  --gold-strong: #8a6118;
+  --gold-soft:   #efe3c0;
+
+  /* --- ink-stamp colors, one per level (light) --- */
+  --stamp-a1: #2c4a7c; /* azul carimbo */
+  --stamp-a2: #5b3a7e; /* roxo carimbo */
+  --stamp-b1: #1e6e68; /* verde-azulado */
+  --stamp-b2: #8a3a24; /* terracota-tijolo */
+  --stamp-c1: #3a3d78; /* índigo — quase lá */
+  --stamp-c2: var(--gold); /* selo dourado — maestria, o topo da escala CEFR (tema-consciente, não redeclarar abaixo) */
+  --stamp-extra: #7a2334; /* selo oficial (mercado de trabalho) */
+  --stamp-recursos: #3b4a5a; /* tinta cartorial */
+  --stamp-root: var(--gold);
+
+  --accent: var(--gold);
+  --shadow: 0 1px 2px rgba(22,36,28,.06), 0 8px 24px -12px rgba(22,36,28,.18);
+  --shadow-lg: 0 2px 6px rgba(22,36,28,.10), 0 18px 38px -14px rgba(22,36,28,.28);
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-l: 22px;
+
+  --font-display:"Fraunces Var","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --font-body:"Public Sans Var",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:"Space Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:          #0a120d;
+    --surface:     #101c15;
+    --surface-2:   #142218;
+    --ink:         #eeead9;
+    --ink-soft:    #c7cabb;
+    --muted:       #8b9686;
+    --border:      #223229;
+    --border-soft: #1a281f;
+
+    --cover:       #123f30;
+    --cover-ink:   #f1eedd;
+    /* --cover-soft stays the pale value from :root — the cover band is
+       always dark green regardless of site theme, so its muted text
+       must stay light in both themes (see :root above). */
+    --gold:        #d9b45a;
+    --gold-strong: #e8c877;
+    --gold-soft:   #2c2513;
+
+    --stamp-a1: #7fa0d8;
+    --stamp-a2: #b190d6;
+    --stamp-b1: #55b6ac;
+    --stamp-b2: #d9906d;
+    --stamp-c1: #a7ace3;
+    /* --stamp-c2 stays var(--gold) from :root — already theme-aware */
+    --stamp-extra: #d98a9b;
+    --stamp-recursos: #8fa3b5;
+    --stamp-root: var(--gold);
+
+    --accent: var(--gold);
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 28px -12px rgba(0,0,0,.6);
+    --shadow-lg: 0 2px 6px rgba(0,0,0,.45), 0 20px 44px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:          #0a120d;
+  --surface:     #101c15;
+  --surface-2:   #142218;
+  --ink:         #eeead9;
+  --ink-soft:    #c7cabb;
+  --muted:       #8b9686;
+  --border:      #223229;
+  --border-soft: #1a281f;
+
+  --cover:       #123f30;
+  --cover-ink:   #f1eedd;
+  /* --cover-soft intentionally not redefined — see note above */
+  --gold:        #d9b45a;
+  --gold-strong: #e8c877;
+  --gold-soft:   #2c2513;
+
+  --stamp-a1: #7fa0d8;
+  --stamp-a2: #b190d6;
+  --stamp-b1: #55b6ac;
+  --stamp-b2: #d9906d;
+  --stamp-c1: #a7ace3;
+  /* --stamp-c2 stays var(--gold) from :root — already theme-aware */
+  --stamp-extra: #d98a9b;
+  --stamp-recursos: #8fa3b5;
+  --stamp-root: var(--gold);
+
+  --accent: var(--gold);
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 28px -12px rgba(0,0,0,.6);
+  --shadow-lg: 0 2px 6px rgba(0,0,0,.45), 0 20px 44px -16px rgba(0,0,0,.7);
+}
+
+/* level accent shortcuts, set on <body class="lvl-*"> */
+body.lvl-a1{ --accent: var(--stamp-a1); }
+body.lvl-a2{ --accent: var(--stamp-a2); }
+body.lvl-b1{ --accent: var(--stamp-b1); }
+body.lvl-b2{ --accent: var(--stamp-b2); }
+body.lvl-c1{ --accent: var(--stamp-c1); }
+body.lvl-c2{ --accent: var(--stamp-c2); }
+body.lvl-extra{ --accent: var(--stamp-extra); }
+body.lvl-recursos{ --accent: var(--stamp-recursos); }
+body.lvl-root{ --accent: var(--stamp-root); }
+
+*{box-sizing:border-box}
+html,body{margin:0; padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font-body); font-size:16px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+::selection{background:var(--gold-soft); color:var(--ink)}
+img{max-width:100%}
+
+.wrap{max-width:760px; margin:0 auto; padding-inline:20px}
+
+/* ---------------------------------------------------------
+   Top bar (used on every lesson/reference page)
+   --------------------------------------------------------- */
+.topbar{
+  background:var(--cover); color:var(--cover-ink);
+  border-bottom:1px solid rgba(0,0,0,.15);
+}
+.topbar-inner{
+  max-width:760px; margin:0 auto; padding:14px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+}
+.brand{
+  display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+  color:var(--cover-ink); font-family:var(--font-display); font-weight:600; font-size:16px;
+  letter-spacing:.01em;
+}
+.brand svg, .brand img{display:block; flex:none}
+
+/* Full brand lockup (icon + wordmark + tagline) — homepage letterhead */
+.brand-letterhead{ text-align:center; padding:38px 20px 0; }
+.brand-letterhead .mark-xl{ width:60px; height:60px; margin:0 auto 16px; display:block }
+.brand-letterhead .word{
+  font-family:var(--font-display); font-weight:600; letter-spacing:.005em;
+  font-size:clamp(32px,6vw,50px); line-height:1;
+}
+.brand-letterhead .w-next{ color:var(--cover-ink) }
+.brand-letterhead .w-fluent{ color:var(--gold-strong) }
+.brand-letterhead .rule-row{
+  display:flex; align-items:center; justify-content:center; gap:16px; margin:16px 0 10px;
+}
+.brand-letterhead .rule{ height:1px; width:38px; background:var(--gold-strong); opacity:.55 }
+.brand-letterhead .tagline{
+  font-family:var(--font-mono); font-size:12.5px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--gold-strong);
+}
+.brand-letterhead .strapline{
+  font-family:var(--font-mono); font-size:10.5px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--cover-ink); opacity:.62; margin-top:10px;
+}
+
+/* Small crest (badge mark) used as a certificate letterhead — fixed
+   colors baked into the SVG itself, so it reads correctly on paper
+   regardless of light/dark theme or print. */
+.cert-crest{ margin:0 auto 16px; display:block }
+
+.stampbadge{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--cover-ink); opacity:.92;
+}
+.stampbadge .dot{
+  width:22px; height:22px; border-radius:50%;
+  background:var(--accent); color:var(--cover);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-weight:700; font-size:9px;
+  border:1.5px dashed rgba(255,255,255,.55);
+}
+
+/* Mini área de conta na barra superior (Entrar/Criar conta, ou nome do
+   aluno logado + Sair) — preenchida por assets/auth.js. */
+.auth-slot{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase;
+}
+.auth-slot:empty{ display:none }
+.auth-slot a, .auth-slot button{
+  font:inherit; color:var(--cover-ink); text-decoration:none; cursor:pointer;
+  background:transparent; border:1px solid rgba(241,238,221,.4);
+  padding:6px 12px; border-radius:999px; transition:border-color .15s ease, color .15s ease;
+}
+.auth-slot a:hover, .auth-slot button:hover{ border-color:var(--gold-strong); color:var(--gold-strong) }
+.auth-slot .auth-name{ opacity:.85; text-transform:none; letter-spacing:0; padding:0 2px }
+
+/* ---------------------------------------------------------
+   Article (lesson content)
+   --------------------------------------------------------- */
+main.page{padding-block:34px 70px}
+article{max-width:100%}
+article > *:first-child{margin-top:0}
+
+article h1{
+  font-family:var(--font-display); font-weight:600; font-size:clamp(26px,4.4vw,34px);
+  letter-spacing:-0.01em; line-height:1.18; margin:0 0 8px; text-wrap:balance;
+  padding-bottom:14px; border-bottom:3px solid var(--accent);
+}
+article h2{
+  font-family:var(--font-body); font-weight:700; font-size:20px;
+  margin:38px 0 14px; letter-spacing:-0.005em; color:var(--ink);
+}
+article h3{
+  font-family:var(--font-body); font-weight:600; font-size:16px;
+  margin:26px 0 10px; color:var(--ink-soft);
+}
+article p{margin:12px 0; max-width:70ch}
+article ul, article ol{padding-left:22px; max-width:70ch}
+article li{margin:5px 0}
+article hr{border:none; border-top:1px solid var(--border); margin:32px 0}
+article strong{font-weight:700}
+article em{font-style:italic}
+article code{
+  background:var(--surface-2); padding:2px 6px; border-radius:5px;
+  font-family:var(--font-mono); font-size:0.85em; color:var(--ink);
+}
+article pre{background:var(--surface-2); padding:14px 16px; border-radius:var(--radius-s); overflow-x:auto}
+article pre code{background:none; padding:0}
+
+article blockquote{
+  margin:16px 0; padding:12px 18px; background:var(--surface-2);
+  border-left:3px solid var(--accent); border-radius:0 var(--radius-s) var(--radius-s) 0;
+  color:var(--ink-soft); font-size:15px;
+}
+article blockquote p{margin:5px 0; max-width:none}
+
+/* the fill-in-the-blank markers */
+.blank{
+  display:inline-block; border-bottom:2px solid var(--muted); height:1px;
+  vertical-align:baseline; margin:0 2px;
+}
+.blank-s{width:2.6em}
+.blank-m{width:5.2em}
+.blank-l{width:9em}
+
+/* tables */
+.table-scroll{overflow-x:auto; margin:18px 0; border:1px solid var(--border); border-radius:var(--radius-s)}
+article table{border-collapse:collapse; width:100%; font-size:14.5px; background:var(--surface)}
+article th, article td{padding:9px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border-soft)}
+article th{
+  background:var(--surface-2); color:var(--accent); font-family:var(--font-mono);
+  font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; font-weight:700;
+  border-bottom:1px solid var(--border);
+}
+article tr:last-child td{border-bottom:none}
+article tr:hover td{background:color-mix(in srgb, var(--accent) 6%, transparent)}
+
+footer.page-footer{
+  margin-top:48px; padding-top:20px; border-top:1px solid var(--border);
+  color:var(--muted); font-size:13px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+footer.page-footer a{font-weight:600; text-decoration:none}
+footer.page-footer a:hover{text-decoration:underline}
+
+/* ===========================================================
+   Landing page components (index.html)
+   =========================================================== */
+.eyebrow{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+}
+.cover-band{ background:var(--cover); color:var(--cover-ink); }
+.cover-band a{ color:var(--gold-strong) }
+
+.hero{
+  max-width:900px; margin:0 auto; padding:56px 20px 46px;
+  display:grid; grid-template-columns:1.15fr .85fr; gap:36px; align-items:center;
+}
+@media (max-width:760px){ .hero{grid-template-columns:1fr; padding-top:40px} }
+
+.hero h1{
+  font-family:var(--font-display); font-weight:600; font-size:clamp(34px,6vw,54px);
+  line-height:1.05; letter-spacing:-0.015em; margin:14px 0 16px;
+}
+.hero h1 em{font-style:italic; color:var(--gold-strong)}
+.hero p.lead{
+  font-size:17px; line-height:1.6; color:var(--cover-soft); max-width:46ch; margin:0 0 26px;
+}
+.hero .eyebrow{ color:var(--gold-strong) }
+.account-hint{ font-size:13.5px; color:var(--cover-soft); margin-top:16px }
+.account-hint a{ color:var(--gold-strong); font-weight:700 }
+.account-hint:empty, .account-hint[hidden]{ display:none }
+
+@media (prefers-reduced-motion: no-preference){
+  .hero-copy{ animation:nf-rise .6s ease-out both; }
+  .hero-preview{ animation:nf-rise .6s ease-out .1s both; }
+  @keyframes nf-rise{ from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
+}
+
+/* "product preview" mockup in the hero — a little browser/app frame with a
+   real mini lesson inside, so the homepage shows the actual product instead
+   of just an abstract graphic. */
+.hero-preview{ position:relative }
+.preview-frame{
+  background:var(--surface); border-radius:var(--radius-l); overflow:hidden;
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.55), 0 0 0 1px rgba(241,238,221,.08);
+  transform:rotate(1.4deg);
+}
+.preview-bar{
+  display:flex; align-items:center; gap:5px; padding:11px 14px;
+  background:var(--surface-2); border-bottom:1px solid var(--border-soft);
+}
+.preview-dot{width:7px; height:7px; border-radius:50%; background:var(--border)}
+.preview-url{
+  margin-left:9px; font-family:var(--font-mono); font-size:10px; color:var(--muted);
+  letter-spacing:.02em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.preview-body{ padding:20px 22px 22px; color:var(--ink) }
+.preview-badge{
+  display:inline-block; font-family:var(--font-mono); font-size:9.5px; letter-spacing:.08em;
+  text-transform:uppercase; background:var(--stamp-a1); color:#fff; padding:3px 9px; border-radius:999px;
+  margin-bottom:12px;
+}
+.preview-body h4{ font-family:var(--font-display); font-size:18px; margin:0 0 14px; font-weight:600; line-height:1.25 }
+.preview-row{
+  display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-top:1px solid var(--border-soft);
+  font-size:13px;
+}
+.preview-row:first-of-type{ border-top:none }
+.preview-en strong{ color:var(--stamp-a1) }
+.preview-pt{ color:var(--muted); flex:none }
+.preview-complete{
+  margin-top:16px; width:100%; padding:11px; border-radius:999px; border:none;
+  background:var(--stamp-a1); color:#fff; font-weight:700; font-size:12.5px; cursor:default;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+}
+.preview-stamp{ position:absolute; top:-20px; right:-16px; width:78px; height:78px; filter:drop-shadow(0 6px 14px rgba(0,0,0,.35)) }
+@media (max-width:760px){
+  .preview-frame{ transform:none; max-width:360px; margin:0 auto }
+  .preview-stamp{ top:-16px; right:calc(50% - 190px) }
+}
+
+.cta-row{display:flex; gap:12px; flex-wrap:wrap}
+.seal-btn{
+  display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+  padding:12px 22px; border-radius:999px; font-weight:700; font-size:14.5px;
+  font-family:var(--font-body); border:1.5px solid transparent; transition:transform .15s ease;
+}
+.seal-btn:hover{transform:translateY(-1px)}
+.seal-btn.solid{ background:var(--gold); color:#1b1204; border-color:var(--gold) }
+.seal-btn.outline{ background:transparent; color:var(--cover-ink); border-color:rgba(241,238,221,.45) }
+/* variante pra usar fora da cover-band (fundo claro do body, não o verde escuro) */
+.seal-btn.outline-ink{ background:transparent; color:var(--ink); border-color:var(--border) }
+.seal-btn.outline-ink:hover{ border-color:var(--accent) }
+
+/* ticket / boarding-pass strip */
+.ticket{
+  max-width:900px; margin:-28px auto 0; padding:0 20px; position:relative; z-index:2;
+}
+.ticket-inner{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l);
+  box-shadow:var(--shadow); display:flex; flex-wrap:wrap;
+}
+.ticket-field{
+  flex:1 1 140px; padding:18px 22px; border-right:1px dashed var(--border);
+}
+.ticket-field:last-child{border-right:none}
+.ticket-field .k{
+  font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+}
+.ticket-field .v{
+  font-family:var(--font-display); font-size:22px; font-weight:600; color:var(--ink); margin-top:4px;
+}
+.ticket-field .v small{font-family:var(--font-body); font-weight:600; font-size:12px; color:var(--muted)}
+
+/* section shell */
+.section{max-width:900px; margin:0 auto; padding:64px 20px}
+.section-head{max-width:60ch; margin-bottom:28px}
+.section-head.center{max-width:56ch; margin-inline:auto; text-align:center}
+.section-head .eyebrow{color:var(--accent)}
+.section-head h2{
+  font-family:var(--font-display); font-weight:600; font-size:clamp(24px,3.6vw,32px);
+  margin:8px 0 10px; letter-spacing:-0.01em; text-wrap:balance;
+}
+.section-head p{color:var(--muted); margin:0; font-size:15.5px}
+
+/* ===========================================================
+   "Por que o NextFluent" — grade de diferenciais
+   =========================================================== */
+.feature-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px }
+@media (max-width:760px){ .feature-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:520px){ .feature-grid{grid-template-columns:1fr} }
+.feature-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m);
+  padding:22px 20px; transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.feature-card:hover{ transform:translateY(-3px); border-color:var(--accent); box-shadow:var(--shadow-lg) }
+.feature-icon{
+  width:40px; height:40px; border-radius:11px; background:var(--gold-soft); color:var(--gold-strong);
+  display:flex; align-items:center; justify-content:center; margin-bottom:14px; flex:none;
+}
+.feature-icon svg{width:21px; height:21px; display:block}
+.feature-card h3{ font-family:var(--font-display); font-size:16.5px; margin:0 0 7px; font-weight:600 }
+.feature-card p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.55 }
+
+/* ===========================================================
+   "Como funciona" — passo a passo
+   =========================================================== */
+.steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px }
+@media (max-width:760px){ .steps{grid-template-columns:1fr 1fr} }
+@media (max-width:460px){ .steps{grid-template-columns:1fr} }
+.step{ border-top:2px solid var(--accent); padding-top:14px }
+.step-num{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; color:var(--gold-strong);
+  display:block; margin-bottom:8px;
+}
+.step h3{ font-family:var(--font-display); font-size:16px; margin:0 0 6px; font-weight:600 }
+.step p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.55 }
+
+/* ===========================================================
+   FAQ — accordion nativo (<details>/<summary>, sem JS)
+   =========================================================== */
+.faq-list{ display:flex; flex-direction:column; gap:10px; max-width:720px; margin:0 auto }
+.faq-item{
+  border:1px solid var(--border); border-radius:var(--radius-m); background:var(--surface); overflow:hidden;
+}
+.faq-item summary{
+  padding:17px 44px 17px 20px; cursor:pointer; font-weight:700; font-size:15px; list-style:none;
+  position:relative; line-height:1.4;
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{
+  content:"+"; font-size:22px; font-weight:400; color:var(--accent); line-height:1;
+  position:absolute; right:18px; top:50%; transform:translateY(-50%); transition:transform .2s ease;
+}
+.faq-item[open] summary::after{ transform:translateY(-50%) rotate(45deg) }
+.faq-item .faq-body{ padding:0 20px 18px; color:var(--muted); font-size:14px; line-height:1.6 }
+
+/* ===========================================================
+   Banner final de CTA
+   =========================================================== */
+.cta-banner{ background:var(--cover); color:var(--cover-ink); text-align:center; padding:60px 20px; margin-top:8px }
+.cta-banner h2{ font-family:var(--font-display); font-size:clamp(24px,4vw,32px); margin:0 0 12px; font-weight:600 }
+.cta-banner p{ color:var(--cover-soft); margin:0 0 26px; font-size:15px }
+.cta-banner .cta-row{ justify-content:center }
+
+/* route of stamps */
+.route{
+  display:flex; flex-direction:column; gap:0;
+}
+.stop{
+  display:grid; grid-template-columns:64px 1fr; gap:20px; position:relative; padding-bottom:34px;
+}
+.stop:last-child{padding-bottom:0}
+.stop::before{ /* connecting dashed line */
+  content:""; position:absolute; left:31px; top:64px; bottom:0; width:0;
+  border-left:2px dashed var(--border);
+}
+.stop:last-child::before{display:none}
+.stop-mark{
+  width:64px; height:64px; border-radius:50%; flex:none;
+  border:2px dashed color-mix(in srgb, var(--stop-color, var(--accent)) 70%, var(--border));
+  color:var(--stop-color, var(--accent));
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-family:var(--font-display); font-weight:700; font-size:16px;
+  transform:rotate(-8deg); background:var(--surface); position:relative; z-index:1;
+}
+.stop-final .stop-mark{
+  border-style:solid; box-shadow:0 0 0 4px color-mix(in srgb, var(--stamp-c2) 16%, transparent);
+}
+.stop-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m);
+  padding:18px 20px; box-shadow:var(--shadow); text-decoration:none; color:var(--ink);
+  display:block; transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.stop-card:hover{ border-color:var(--stop-color, var(--accent)); transform:translateX(2px); box-shadow:var(--shadow-lg) }
+.stop-card .code{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--stop-color, var(--accent)); font-weight:700;
+}
+.stop-card h3{
+  font-family:var(--font-display); font-weight:600; font-size:19px; margin:4px 0 6px; color:var(--ink);
+}
+.stop-card p{margin:0; color:var(--muted); font-size:14px; line-height:1.5}
+
+/* bonus stamp — the job-market module, deliberately outside the CEFR route */
+.bonus-stamp{
+  display:flex; align-items:center; gap:20px; text-decoration:none; color:var(--ink);
+  background:var(--surface); border:2px dashed var(--stamp-extra); border-radius:var(--radius-l);
+  padding:20px 24px; transition:background-color .15s ease, transform .15s ease;
+}
+.bonus-stamp:hover{ background:color-mix(in srgb, var(--stamp-extra) 6%, var(--surface)); transform:translateY(-1px) }
+.bonus-stamp-mark{
+  flex:none; width:56px; height:56px; border-radius:50%; border:2px dashed var(--stamp-extra);
+  display:flex; align-items:center; justify-content:center; font-size:22px; background:var(--surface-2);
+  color:var(--stamp-extra);
+}
+.bonus-stamp-mark svg{display:block}
+.bonus-stamp-body{flex:1; min-width:0}
+.bonus-stamp-body .code{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--stamp-extra); font-weight:700;
+}
+.bonus-stamp-body h3{
+  font-family:var(--font-display); font-weight:600; font-size:19px; margin:4px 0 6px; color:var(--ink);
+}
+.bonus-stamp-body p{margin:0; color:var(--muted); font-size:14px; line-height:1.5}
+.bonus-stamp-arrow{flex:none; font-size:22px; color:var(--stamp-extra)}
+@media (max-width:600px){
+  .bonus-stamp{flex-wrap:wrap}
+  .bonus-stamp-arrow{display:none}
+}
+
+/* documents checklist */
+.doclist{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+@media (max-width:600px){ .doclist{grid-template-columns:1fr} }
+.doc{
+  display:flex; gap:14px; padding:16px 18px; background:var(--surface);
+  border:1px solid var(--border); border-radius:var(--radius-m); text-decoration:none; color:var(--ink);
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.doc:hover{border-color:var(--accent); box-shadow:var(--shadow-lg)}
+.doc .check{
+  flex:none; width:26px; height:26px; border-radius:6px; border:2px solid var(--accent);
+  display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:14px; margin-top:2px;
+}
+.doc .name{font-weight:700; font-size:15px}
+.doc .desc{color:var(--muted); font-size:13px; margin-top:2px}
+
+.site-footer{
+  background:var(--cover); color:var(--cover-soft);
+}
+.site-footer .wrap{max-width:900px; padding-block:32px}
+.site-footer a{color:var(--gold-strong); text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+.site-footer .links{display:flex; gap:16px; flex-wrap:wrap; font-size:13.5px; margin-bottom:14px}
+
+/* footer mais completo, só na home (index.html) */
+.footer-grid{ display:grid; grid-template-columns:1.3fr repeat(3,1fr); gap:28px; margin-bottom:28px }
+@media (max-width:700px){ .footer-grid{grid-template-columns:1fr 1fr; gap:24px} }
+@media (max-width:460px){ .footer-grid{grid-template-columns:1fr} }
+.footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:10px }
+.footer-brand img{ width:26px; height:26px; display:block }
+.footer-brand span{ font-family:var(--font-display); font-weight:600; font-size:16px; color:var(--cover-ink) }
+.footer-about{ font-size:13px; line-height:1.6; max-width:32ch; color:var(--cover-soft) }
+.footer-col h4{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--cover-soft); opacity:.75; margin:0 0 12px; font-weight:400;
+}
+.footer-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px }
+.footer-col a{ font-size:13.5px }
+.footer-bottom{
+  border-top:1px solid rgba(241,238,221,.14); padding-top:18px;
+  display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:12.5px; color:var(--cover-soft); opacity:.8;
+}
+
+/* ===========================================================
+   Progresso do aluno: botão "concluir aula", barra de progresso
+   e certificado (tudo guardado em localStorage, ver progress.js)
+   =========================================================== */
+.lesson-complete{margin-top:40px}
+.complete-btn{
+  width:100%; padding:14px 20px; border-radius:var(--radius-m);
+  border:2px dashed var(--accent); background:var(--surface-2); color:var(--ink);
+  font-family:var(--font-body); font-weight:700; font-size:15px; cursor:pointer;
+  transition:background .15s ease, border-style .15s ease, color .15s ease;
+}
+.complete-btn:hover{background:var(--surface)}
+.complete-btn.is-done{
+  border-style:solid; background:var(--accent); color:var(--cover);
+}
+
+.progress-head{display:flex; justify-content:space-between; font-size:13.5px; color:var(--muted); margin-bottom:8px}
+.progress-bar{
+  width:100%; height:10px; border-radius:999px; background:var(--surface-2);
+  border:1px solid var(--border); overflow:hidden;
+}
+.progress-fill{height:100%; background:var(--accent); border-radius:999px; transition:width .3s ease}
+.progress-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+#nf-progress{margin:28px auto 0; max-width:900px; padding:0 20px}
+
+/* selo de progresso dentro de cada stop-card da rota (index.html) */
+.stop-progress{
+  font-family:var(--font-mono); font-size:11.5px; color:var(--muted);
+  margin-top:8px; letter-spacing:.03em;
+}
+
+/* --- página do certificado --- */
+.cert-wrap{max-width:720px; margin:0 auto; padding:48px 20px 80px}
+.cert-pending{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l);
+  padding:36px; text-align:center;
+}
+.cert-pending h2{font-family:var(--font-display); font-size:24px; margin:8px 0 20px}
+.cert-pending-count{color:var(--muted); font-size:14px; margin:10px 0 24px}
+.cert-progress-list{
+  display:grid; gap:8px; text-align:left; margin:0 0 24px; max-width:420px; margin-inline:auto;
+}
+.cert-progress-row{
+  display:flex; justify-content:space-between; padding:8px 14px; border-radius:var(--radius-s);
+  background:var(--surface-2); font-family:var(--font-mono); font-size:13px;
+}
+
+.certificate{
+  background:var(--surface); border:3px double var(--gold); border-radius:var(--radius-l);
+  padding:48px 40px; text-align:center; position:relative;
+}
+.certificate-eyebrow{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--gold-strong); margin-bottom:14px;
+}
+.certificate h2{
+  font-family:var(--font-display); font-weight:600; font-size:clamp(24px,4vw,32px); margin:0 0 24px;
+}
+.certificate-lead{color:var(--ink-soft); font-size:15.5px; margin:10px 0}
+.cert-name{
+  font-family:var(--font-display); font-size:clamp(22px,4vw,30px); font-weight:600;
+  color:var(--accent); margin:14px 0; padding-bottom:10px; border-bottom:2px solid var(--gold-soft);
+  display:inline-block; min-width:60%;
+}
+.cert-name-form{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:16px 0}
+.cert-name-form input{
+  font:inherit; font-size:15px; padding:10px 14px; border-radius:var(--radius-s);
+  border:1px solid var(--border); background:var(--surface-2); color:var(--ink); min-width:240px;
+}
+.certificate-date{
+  font-family:var(--font-mono); font-size:13px; color:var(--muted); margin-top:18px;
+}
+.certificate-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:30px}
+
+/* ===========================================================
+   Área de cadastro — cadastro.html / login.html
+   =========================================================== */
+.auth-wrap{max-width:440px; margin:0 auto; padding:48px 20px 90px}
+.auth-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-l);
+  padding:36px 32px; box-shadow:var(--shadow);
+}
+.auth-card h1{
+  font-family:var(--font-display); font-weight:600; font-size:clamp(24px,4vw,29px); margin:0 0 8px;
+}
+.auth-card .lead{color:var(--muted); font-size:14.5px; margin:0 0 26px; line-height:1.5}
+.auth-field{display:block; margin-bottom:16px}
+.auth-field label{display:block; font-size:13px; font-weight:700; margin-bottom:6px; color:var(--ink-soft)}
+.auth-field input{
+  width:100%; font:inherit; font-size:15px; padding:11px 14px; border-radius:var(--radius-s);
+  border:1px solid var(--border); background:var(--surface-2); color:var(--ink);
+}
+.auth-field input:focus{outline:2px solid var(--accent); outline-offset:1px}
+.auth-field small{display:block; margin-top:5px; color:var(--muted); font-size:12px}
+.auth-submit{width:100%; justify-content:center; margin-top:6px}
+.auth-error{
+  background:var(--gold-soft); color:var(--ink); border-radius:var(--radius-s);
+  padding:10px 14px; font-size:13.5px; margin:0 0 16px;
+}
+.auth-error:empty{display:none}
+.auth-switch{text-align:center; margin-top:20px; font-size:14px; color:var(--muted)}
+.auth-note{
+  background:var(--surface-2); border:1px dashed var(--border); border-radius:var(--radius-m);
+  padding:16px 18px; font-size:13.5px; color:var(--ink-soft); text-align:center; margin-top:22px;
+}
+
+/* ===========================================================
+   Painel do admin — admin.html (lista de alunos cadastrados)
+   =========================================================== */
+.admin-wrap{max-width:1020px; margin:0 auto; padding:40px 20px 90px}
+.admin-stats{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:26px}
+.admin-stat{
+  flex:1 1 150px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m);
+  padding:16px 18px;
+}
+.admin-stat .k{font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+.admin-stat .v{font-family:var(--font-display); font-size:27px; font-weight:600; margin-top:4px}
+.admin-toolbar{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:16px}
+.admin-table-wrap{overflow-x:auto; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m)}
+.admin-table{width:100%; border-collapse:collapse; font-size:13.5px; min-width:680px}
+.admin-table th, .admin-table td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--border-soft); white-space:nowrap}
+.admin-table th{font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.admin-table tr:last-child td{border-bottom:none}
+.admin-table .pct-bar{
+  display:inline-block; width:70px; height:6px; border-radius:999px; background:var(--surface-2);
+  overflow:hidden; vertical-align:middle; margin-right:8px;
+}
+.admin-table .pct-fill{display:block; height:100%; background:var(--accent)}
+
+/* ===========================================================
+   Áudio da aula (Web Speech API — ver assets/audio.js)
+   =========================================================== */
+#nf-audio-bar:empty{display:none}
+.audio-bar-inner{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  padding:14px 18px; margin-bottom:26px;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m);
+}
+.audio-play{
+  padding:9px 18px; border-radius:999px; border:1.5px solid var(--accent);
+  background:var(--accent); color:var(--cover);
+  font-family:var(--font-body); font-weight:700; font-size:14px; cursor:pointer;
+}
+.audio-play.is-playing{background:transparent; color:var(--accent)}
+.audio-count{font-family:var(--font-mono); font-size:11.5px; color:var(--muted)}
+.audio-rate{
+  margin-left:auto; display:inline-flex; align-items:center; gap:8px;
+  font-size:12.5px; color:var(--muted);
+}
+.audio-rate select{
+  font:inherit; font-size:12.5px; padding:5px 8px; border-radius:var(--radius-s);
+  border:1px solid var(--border); background:var(--surface-2); color:var(--ink);
+}
+.audio-voices-toggle{
+  padding:7px 14px; border-radius:999px; border:1px solid var(--border);
+  background:transparent; color:var(--ink); font-family:var(--font-body);
+  font-size:12.5px; font-weight:600; cursor:pointer;
+}
+.audio-voices-toggle:hover{border-color:var(--accent)}
+.audio-voices{
+  margin:-14px 0 26px; padding:16px 18px; display:grid; gap:12px;
+  background:var(--surface-2); border:1px solid var(--border);
+  border-top:none; border-radius:0 0 var(--radius-m) var(--radius-m);
+}
+/* o display:grid acima venceria o [hidden] do navegador — reforça aqui */
+.audio-voices[hidden]{display:none}
+.audio-voice-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.audio-voice-label{font-size:13px; font-weight:600; min-width:140px}
+.audio-voice-empty{font-size:12.5px; color:var(--muted)}
+.audio-voice-row select{
+  font:inherit; font-size:12.5px; padding:6px 8px; border-radius:var(--radius-s);
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  max-width:100%; flex:1; min-width:180px;
+}
+.audio-voice-test{
+  padding:6px 12px; border-radius:999px; border:1px solid var(--accent);
+  background:transparent; color:var(--accent); font-family:var(--font-body);
+  font-size:12.5px; font-weight:700; cursor:pointer;
+}
+.audio-voice-test:hover{background:var(--accent); color:var(--cover)}
+.audio-voices-hint{margin:0; font-size:12px; color:var(--muted); line-height:1.5}
+
+.audio-unavailable{
+  margin:0 0 26px; padding:12px 16px; font-size:13px; color:var(--muted);
+  background:var(--surface-2); border-radius:var(--radius-s);
+}
+
+.say-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:24px; height:24px; margin-left:7px; padding:0; vertical-align:middle;
+  border-radius:50%; border:1px solid var(--border); background:var(--surface);
+  color:var(--accent); cursor:pointer; transition:background .12s ease, border-color .12s ease;
+}
+.say-btn:hover{background:var(--accent); color:var(--cover); border-color:var(--accent)}
+.say-btn svg{display:block}
+.say-line{display:inline}
+.is-speaking{
+  background:var(--gold-soft); border-radius:var(--radius-s);
+  box-shadow:0 0 0 3px var(--gold-soft);
+}
+
+@media print{
+  #nf-audio-bar, .say-btn, .audio-voices{display:none !important}
+  .topbar, .site-footer, .no-print{display:none !important}
+  body{background:#fff}
+  .cert-wrap{padding:0; max-width:none}
+  .certificate{border:3px double #a9791f; box-shadow:none}
+}

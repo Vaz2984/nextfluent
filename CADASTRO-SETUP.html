@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Como ativar a área de cadastro · NextFluent</title>
+<meta name="description" content="Curso gratuito de inglês em português, do A1 ao C2 (topo da escala CEFR), com módulo extra de inglês para o mercado de trabalho.">
+<link rel="icon" type="image/svg+xml" href="assets/brand/mark-badge.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NextFluent">
+<meta property="og:title" content="Como ativar a área de cadastro · NextFluent">
+<meta property="og:description" content="Curso gratuito de inglês em português, do A1 ao C2 (topo da escala CEFR), com módulo extra de inglês para o mercado de trabalho.">
+<meta property="og:image" content="https://vaz2984.github.io/curso-English/assets/brand/og-image.png">
+<meta property="og:url" content="https://vaz2984.github.io/curso-English/CADASTRO-SETUP.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Como ativar a área de cadastro · NextFluent">
+<meta name="twitter:description" content="Curso gratuito de inglês em português, do A1 ao C2 (topo da escala CEFR), com módulo extra de inglês para o mercado de trabalho.">
+<meta name="twitter:image" content="https://vaz2984.github.io/curso-English/assets/brand/og-image.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="lvl-root">
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><img class="brand-mark" src="assets/brand/mark.svg" width="24" height="24" alt=""><span>NextFluent</span></a>
+    <span class="stampbadge"><span class="dot">EN</span>Guia do curso</span>
+    <span id="nf-auth-slot" class="auth-slot" data-root=""></span>
+  </div>
+</div>
+<main class="page">
+  <div class="wrap">
+    
+    <article>
+<h1>Como ativar a área de cadastro</h1>
+<p>O curso já vem com uma área de cadastro completa (criar conta, entrar,
+progresso sincronizado entre aparelhos, certificado ligado à conta e um
+painel para você ver/baixar a lista de alunos). Ela roda em cima do
+<a href="https://supabase.com">Supabase</a> (gratuito, sem cartão de crédito no
+plano usado aqui) e leva uns 5 minutos pra configurar.</p>
+<p><strong>Enquanto você não configurar</strong>, o curso continua funcionando
+exatamente como antes: sem cadastro, 100% local, com o progresso salvo
+só no navegador de cada aluno. Nada quebra: o cadastro só "liga"
+depois do passo 5 abaixo.</p>
+<p><strong>Atenção ao que muda depois do passo 5</strong>: assim que o Supabase estiver
+configurado, todas as aulas (<code>niveis/</code> e
+<code>ingles-mercado-de-trabalho/</code>) passam a <strong>exigir login</strong> — quem tentar
+abrir uma aula sem estar logado é redirecionado para <code>login.html</code> e
+volta pra aula assim que entra ou cria a conta. A home (<code>index.html</code>),
+os guias (<code>README.html</code>, <code>GUIA-DE-ESTUDOS.html</code>) e os recursos
+(<code>recursos/</code>) continuam abertos pra qualquer visitante, sem conta,
+servindo de "vitrine" antes do cadastro. Se preferir manter as aulas
+abertas mesmo depois de configurar o Supabase, é só remover o bloco
+<code>LESSON_GATE_SCRIPT</code> de <code>scripts/build_html.py</code> e rodar
+<code>python3 scripts/build_html.py</code> de novo.</p>
+<h2>Passo a passo</h2>
+<ol>
+<li>Acesse <a href="https://supabase.com">supabase.com</a>, crie uma conta (dá pra
+   entrar com GitHub ou Google) e clique em <strong>"New project"</strong>. Dê
+   qualquer nome, escolha uma senha de banco (anote em algum lugar
+   seguro, ela não é usada em nenhum arquivo deste repositório) e uma
+   região perto do seu público (ex. South America - São Paulo).</li>
+<li>No menu lateral do projeto, abra <strong>Authentication → Providers →
+   Email</strong>. Deixe o provedor de e-mail ativado e <strong>desative a opção
+   "Confirm email"</strong>, assim, ao criar a conta, o aluno já entra
+   logado na hora, sem precisar clicar num link de confirmação
+   primeiro. (Se preferir manter a confirmação por e-mail ligada, o
+   cadastro também funciona: o aluno só vê uma mensagem pedindo pra
+   confirmar o e-mail antes de conseguir entrar.)</li>
+<li>No menu lateral, abra <strong>SQL Editor → New query</strong>, cole o conteúdo
+   do arquivo <a href="supabase-schema.sql"><code>supabase-schema.sql</code></a> (na raiz
+   deste repositório) e clique em <strong>Run</strong>. Isso cria a tabela de
+   alunos e as regras de segurança (Row Level Security).</li>
+<li>Antes de rodar, troque o e-mail <code>mgvz11232@gmail.com</code> (aparece 3
+     vezes no arquivo) pelo(s) seu(s) e-mail(is) de admin (quem vai
+     acessar o painel de alunos).</li>
+<li>No menu lateral, abra o ícone de engrenagem <strong>Project Settings →
+   API</strong>. Copie os valores <strong>"Project URL"</strong> e <strong>"anon public"</strong> (a
+   chave pública, não use a "service_role", essa é secreta e não
+   deve ir pra este repositório).</li>
+<li>Abra <a href="assets/supabase-config.js"><code>assets/supabase-config.js</code></a> neste
+   repositório e:</li>
+<li>cole os dois valores dentro de <code>window.NEXTFLUENT_SUPABASE_CONFIG</code>
+     (<code>url</code> e <code>anonKey</code>);</li>
+<li>troque <code>window.NEXTFLUENT_ADMIN_EMAILS</code> pelos mesmos e-mails que
+     você colocou no passo 3 (são dois lugares diferentes porque um
+     protege os dados de verdade, as regras do banco, e o outro só
+     controla o que aparece na tela).</li>
+<li>Salve, dê <code>git commit</code> e <code>git push</code>. Pronto, <code>cadastro.html</code>,
+   <code>login.html</code> e <code>admin.html</code> passam a funcionar sozinhos.</li>
+</ol>
+<h2>O que cada e-mail admin consegue fazer</h2>
+<p>Quem estiver logado com um e-mail listado em <code>NEXTFLUENT_ADMIN_EMAILS</code>
+(e em <code>supabase-schema.sql</code>) vê um link <strong>"Alunos"</strong> na barra superior
+do site, que leva a <code>admin.html</code>: uma lista com nome, e-mail, data de
+cadastro, progresso (aulas concluídas/total) e data do certificado de
+cada aluno, com um botão <strong>"Baixar CSV"</strong> para exportar tudo numa
+planilha.</p>
+<h2>Nenhum desses dados é secreto</h2>
+<p>A chave <strong>anon</strong> do Supabase é feita pra ficar visível no navegador de
+quem acessa o site, ela não é uma senha nem dá acesso de
+administrador ao banco. Quem realmente protege os dados dos alunos são
+as políticas de Row Level Security do arquivo <code>supabase-schema.sql</code>:
+cada aluno só lê/escreve o próprio cadastro, e só os e-mails admin
+conseguem listar todos. <strong>Nunca</strong> copie a chave <code>service_role</code> (essa
+sim é secreta) para nenhum arquivo deste site.</p>
+<h2>Se algo der errado</h2>
+<ul>
+<li><strong>O botão "Entrar"/"Criar conta" não aparece na barra superior</strong>:
+  confira se <code>assets/supabase-config.js</code> não está mais com <code>url</code>/
+  <code>anonKey</code> como <code>"REPLACE_ME"</code> e se você deu <code>git push</code> depois de
+  editar.</li>
+<li><strong>Erro "new row violates row-level security policy"</strong>: as políticas
+  do passo 3 ainda não foram criadas (rode <code>supabase-schema.sql</code> de
+  novo) ou o e-mail admin não bate entre <code>supabase-schema.sql</code> e
+  <code>assets/supabase-config.js</code>.</li>
+<li><strong>O aluno cria a conta mas não consegue entrar em seguida</strong>: a opção
+  "Confirm email" (passo 2) está ativada, ou ele confirma o e-mail
+  primeiro, ou você desativa essa opção no painel do Supabase.</li>
+<li><strong>Quer voltar ao modo 100% local (sem cadastro)</strong>: basta desfazer o
+  passo 5, deixando <code>url</code>/<code>anonKey</code> de volta como <code>"REPLACE_ME"</code>.</li>
+</ul>
+    </article>
+    
+    <footer class="page-footer">
+      <span>NextFluent · Inglês sem Fronteiras</span>
+      <span><a href="index.html">← Voltar ao início</a></span>
+    </footer>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Criar conta · NextFluent</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/brand/mark-badge.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/favicon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><img class="brand-mark" src="assets/brand/mark.svg" width="24" height="24" alt=""><span>NextFluent</span></a>
+    <span class="stampbadge">Criar conta</span>
+    <span id="nf-auth-slot" class="auth-slot" data-root=""></span>
+  </div>
+</div>
+
+<main class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="eyebrow" style="color:var(--gold-strong); margin-bottom:10px">Área do aluno</div>
+      <h1>Crie sua conta grátis</h1>
+      <p class="lead">Salve seu progresso, acesse de qualquer aparelho e libere o certificado de conclusão ao terminar o curso.</p>
+
+      <div class="auth-error" id="auth-error"></div>
+
+      <form id="signup-form" novalidate>
+        <div class="auth-field">
+          <label for="f-name">Nome completo</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" required maxlength="80">
+          <small>É o nome que vai aparecer no seu certificado.</small>
+        </div>
+        <div class="auth-field">
+          <label for="f-email">E-mail</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="auth-field">
+          <label for="f-phone">Telefone (WhatsApp)</label>
+          <input type="tel" id="f-phone" name="phone" autocomplete="tel" required placeholder="(11) 91234-5678">
+        </div>
+        <div class="auth-field">
+          <label for="f-password">Senha</label>
+          <input type="password" id="f-password" name="password" autocomplete="new-password" required minlength="6">
+          <small>Pelo menos 6 caracteres.</small>
+        </div>
+        <div class="auth-field">
+          <label for="f-password2">Confirmar senha</label>
+          <input type="password" id="f-password2" name="password2" autocomplete="new-password" required minlength="6">
+        </div>
+        <button type="submit" class="seal-btn solid auth-submit" id="signup-submit">Criar minha conta →</button>
+      </form>
+
+      <div class="auth-switch">Já tem conta? <a href="login.html" id="login-link">Entrar</a></div>
+
+      <div class="auth-note" id="not-configured-note" hidden>
+        A área de cadastro deste curso ainda está sendo configurada pelo administrador.
+        Enquanto isso, seu progresso continua sendo salvo automaticamente neste navegador.
+        <a href="index.html">Volte para o curso</a> e continue de onde parou.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div style="font-weight:700; margin-bottom:12px">NextFluent · Inglês sem Fronteiras</div>
+    <div class="links">
+      <a href="index.html">Início</a>
+      <a href="README.html">Guia completo</a>
+      <a href="certificado.html">Certificado</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/lessons-data.js"></script>
+<script src="assets/progress.js"></script>
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var next = params.get("next") || "index.html";
+    // só aceita um caminho relativo simples do próprio site (evita redirecionar
+    // pra fora do domínio caso alguém monte a URL na mão)
+    if (/^https?:\/\//i.test(next) || next.indexOf("//") === 0) next = "index.html";
+    document.getElementById("login-link").href = "login.html?next=" + encodeURIComponent(next);
+
+    if (!window.NFAuth || !window.NFAuth.isConfigured()) {
+      document.getElementById("not-configured-note").hidden = false;
+      document.getElementById("signup-form").hidden = true;
+      document.querySelector(".auth-switch").hidden = true;
+      return;
+    }
+
+    window.NFAuth.onChange(function (user) {
+      if (user) window.location.href = next;
+    });
+
+    var errorBox = document.getElementById("auth-error");
+    var submitBtn = document.getElementById("signup-submit");
+
+    document.getElementById("signup-form").addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      errorBox.textContent = "";
+      var name = document.getElementById("f-name").value.trim();
+      var email = document.getElementById("f-email").value.trim();
+      var phone = document.getElementById("f-phone").value.trim();
+      var pass = document.getElementById("f-password").value;
+      var pass2 = document.getElementById("f-password2").value;
+
+      if (!name) { errorBox.textContent = "Digite seu nome completo."; return; }
+      if (!phone) { errorBox.textContent = "Digite seu telefone."; return; }
+      if (pass.length < 6) { errorBox.textContent = "A senha precisa ter pelo menos 6 caracteres."; return; }
+      if (pass !== pass2) { errorBox.textContent = "As senhas não são iguais."; return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Criando conta…";
+      window.NFAuth.signUp(name, email, pass, phone)
+        .then(function () {
+          window.location.href = next;
+        })
+        .catch(function (err) {
+          errorBox.textContent = err.message;
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Criar minha conta →";
+        });
+    });
+  })();
+</script>
+</body>
+</html>

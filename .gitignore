@@ -1,0 +1,7 @@
+# Áudio pré-gerado das aulas (scripts/gerar_audio.py) — cada aluno gera o
+# seu localmente (precisa de internet só nessa hora); são milhares de
+# arquivos pequenos, não faz sentido versionar no repositório.
+assets/audio/
+
+__pycache__/
+*.pyc

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificado · NextFluent</title>
+<meta name="description" content="Certificado de conclusão do curso NextFluent · Inglês sem Fronteiras.">
+<link rel="icon" type="image/svg+xml" href="assets/brand/mark-badge.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/favicon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar no-print">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><img class="brand-mark" src="assets/brand/mark.svg" width="24" height="24" alt=""><span>NextFluent</span></a>
+    <span class="stampbadge">Certificado</span>
+    <span id="nf-auth-slot" class="auth-slot" data-root=""></span>
+  </div>
+</div>
+
+<main class="cert-wrap">
+  <div id="nf-certificate"><!-- preenchido por NF.initCertificatePage() --></div>
+</main>
+
+<footer class="site-footer no-print">
+  <div class="wrap">
+    <div style="font-weight:700; margin-bottom:12px">NextFluent · Inglês sem Fronteiras</div>
+    <div class="links">
+      <a href="index.html">Início</a>
+      <a href="README.html">Guia completo</a>
+      <a href="GUIA-DE-ESTUDOS.html">Guia de estudos</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/lessons-data.js"></script>
+<script src="assets/progress.js"></script>
+<script>NF.initCertificatePage();</script>
+</body>
+</html>

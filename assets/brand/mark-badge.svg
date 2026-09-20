@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- NextFluent monogram badge: deep green rounded-square background, used as favicon -->
+  <defs>
+    <linearGradient id="nfGoldGradB" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b6842a"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#f3d989"/>
+    </linearGradient>
+    <clipPath id="nfGlobeClipB">
+      <circle cx="148" cy="86" r="30"/>
+    </clipPath>
+  </defs>
+
+  <rect width="200" height="200" rx="44" fill="#0f3d2e"/>
+
+  <g fill="#f4efdd">
+    <rect x="32" y="40" width="24" height="120" rx="1.5"/>
+    <rect x="142" y="40" width="24" height="120" rx="1.5"/>
+    <polygon points="56,40 80,40 166,160 142,160"/>
+  </g>
+
+  <path d="M14,146 C46,166 86,158 104,130 C114,113 115,93 126,74"
+        fill="none" stroke="url(#nfGoldGradB)" stroke-width="13" stroke-linecap="round"/>
+  <polygon points="154,34 137,61 119,51" fill="url(#nfGoldGradB)"/>
+
+  <circle cx="148" cy="86" r="30" fill="none" stroke="url(#nfGoldGradB)" stroke-width="5.5"/>
+  <g clip-path="url(#nfGlobeClipB)" fill="url(#nfGoldGradB)">
+    <path d="M132,64 C140,60 150,62 152,68 C154,73 148,75 152,80
+             C155,84 160,82 161,88 C162,94 155,95 156,100
+             C157,106 150,106 148,111 C146,116 140,112 136,116
+             C132,120 126,116 127,110 C128,105 133,104 131,99
+             C129,94 122,95 122,89 C122,83 128,82 127,76
+             C126,71 128,66 132,64 Z"/>
+  </g>
+  <ellipse cx="148" cy="86" rx="30" ry="9" fill="none" stroke="#0f3d2e" stroke-width="1.2" opacity=".3"/>
+</svg>

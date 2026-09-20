@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar · NextFluent</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/brand/mark-badge.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/brand/favicon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><img class="brand-mark" src="assets/brand/mark.svg" width="24" height="24" alt=""><span>NextFluent</span></a>
+    <span class="stampbadge">Entrar</span>
+    <span id="nf-auth-slot" class="auth-slot" data-root=""></span>
+  </div>
+</div>
+
+<main class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="eyebrow" style="color:var(--gold-strong); margin-bottom:10px">Área do aluno</div>
+      <h1>Entrar na sua conta</h1>
+      <p class="lead">Acesse seu progresso e seu certificado de qualquer computador ou celular.</p>
+
+      <div class="auth-error" id="auth-error"></div>
+
+      <form id="login-form" novalidate>
+        <div class="auth-field">
+          <label for="f-email">E-mail</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="auth-field">
+          <label for="f-password">Senha</label>
+          <input type="password" id="f-password" name="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="seal-btn solid auth-submit" id="login-submit">Entrar →</button>
+      </form>
+
+      <div class="auth-switch">
+        <a href="#" id="forgot-link">Esqueci minha senha</a>
+      </div>
+      <div class="auth-switch">Ainda não tem conta? <a href="cadastro.html" id="signup-link">Criar conta grátis</a></div>
+
+      <div class="auth-note" id="not-configured-note" hidden>
+        A área de cadastro deste curso ainda está sendo configurada pelo administrador.
+        Enquanto isso, seu progresso continua sendo salvo automaticamente neste navegador.
+        <a href="index.html">Volte para o curso</a> e continue de onde parou.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div style="font-weight:700; margin-bottom:12px">NextFluent · Inglês sem Fronteiras</div>
+    <div class="links">
+      <a href="index.html">Início</a>
+      <a href="README.html">Guia completo</a>
+      <a href="certificado.html">Certificado</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/lessons-data.js"></script>
+<script src="assets/progress.js"></script>
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var next = params.get("next") || "index.html";
+    if (/^https?:\/\//i.test(next) || next.indexOf("//") === 0) next = "index.html";
+    document.getElementById("signup-link").href = "cadastro.html?next=" + encodeURIComponent(next);
+
+    if (!window.NFAuth || !window.NFAuth.isConfigured()) {
+      document.getElementById("not-configured-note").hidden = false;
+      document.getElementById("login-form").hidden = true;
+      document.querySelectorAll(".auth-switch").forEach(function (el) { el.hidden = true; });
+      return;
+    }
+
+    window.NFAuth.onChange(function (user) {
+      if (user) window.location.href = next;
+    });
+
+    var errorBox = document.getElementById("auth-error");
+    var submitBtn = document.getElementById("login-submit");
+
+    document.getElementById("login-form").addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      errorBox.textContent = "";
+      var email = document.getElementById("f-email").value.trim();
+      var pass = document.getElementById("f-password").value;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Entrando…";
+      window.NFAuth.signIn(email, pass)
+        .then(function () {
+          window.location.href = next;
+        })
+        .catch(function (err) {
+          errorBox.textContent = err.message;
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Entrar →";
+        });
+    });
+
+    document.getElementById("forgot-link").addEventListener("click", function (ev) {
+      ev.preventDefault();
+      var email = document.getElementById("f-email").value.trim();
+      if (!email) {
+        errorBox.textContent = "Digite seu e-mail no campo acima primeiro, depois clique em \"Esqueci minha senha\".";
+        return;
+      }
+      window.NFAuth.resetPassword(email)
+        .then(function () {
+          errorBox.textContent = "";
+          window.alert("Pronto! Enviamos um e-mail para " + email + " com instruções para trocar sua senha.");
+        })
+        .catch(function (err) {
+          errorBox.textContent = err.message;
+        });
+    });
+  })();
+</script>
+</body>
+</html>
