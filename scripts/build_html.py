@@ -71,7 +71,7 @@ FAVICON_LINKS = (
     '<link rel="apple-touch-icon" sizes="180x180" href="{root}assets/brand/favicon-180.png">'
 )
 
-SITE_BASE_URL = "https://vaz2984.github.io/curso-English/"
+SITE_BASE_URL = "https://vaz2984.github.io/nextfluent/"
 OG_DESCRIPTION = (
     "Curso gratuito de inglês em português, do A1 ao C2 (topo da escala CEFR), "
     "com módulo extra de inglês para o mercado de trabalho."
