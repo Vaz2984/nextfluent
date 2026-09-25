@@ -3,29 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NextFluent · Inglês sem Fronteiras</title>
-<meta name="description" content="NextFluent: curso gratuito de inglês em português, do nível A1 ao C2 (topo da escala CEFR), com módulo extra de inglês para o mercado de trabalho. Roda 100% offline, no seu navegador.">
+<title>Criar conta · NextFluent</title>
+<meta name="description" content="Crie sua conta gratuita para acessar o curso NextFluent: inglês do A1 ao C2, com progresso salvo e certificado ao concluir.">
 <link rel="icon" type="image/svg+xml" href="assets/brand/mark-badge.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NextFluent">
 <meta property="og:title" content="NextFluent · Inglês sem Fronteiras">
-<meta property="og:description" content="Curso gratuito de inglês em português, do A1 ao C2 (topo da escala CEFR), com módulo extra de inglês para o mercado de trabalho.">
+<meta property="og:description" content="Curso de inglês em português, do A1 ao C2 (topo da escala CEFR), com módulo extra de inglês para o mercado de trabalho.">
 <meta property="og:image" content="https://vaz2984.github.io/nextfluent/assets/brand/og-image.png">
 <meta property="og:url" content="https://vaz2984.github.io/nextfluent/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NextFluent · Inglês sem Fronteiras">
-<meta name="twitter:description" content="Curso gratuito de inglês em português, do A1 ao C2 (topo da escala CEFR), com módulo extra de inglês para o mercado de trabalho.">
+<meta name="twitter:description" content="Curso de inglês em português, do A1 ao C2 (topo da escala CEFR), com módulo extra de inglês para o mercado de trabalho.">
 <meta name="twitter:image" content="https://vaz2984.github.io/nextfluent/assets/brand/og-image.png">
 <link rel="stylesheet" href="assets/style.css">
-<style>
-  .stamp-ring{ stroke:var(--gold); }
-  .stamp-ring-soft{ stroke:var(--gold); opacity:.5 }
-  .stamp-arc-text{ fill:var(--gold); }
-  .stamp-center{ fill:var(--cover-ink); font-family:var(--font-display); }
-  .stamp-sub{ fill:var(--gold); font-family:var(--font-mono); }
-</style>
 </head>
 <body>
 
@@ -37,328 +30,70 @@
   </div>
 </div>
 
-<div class="cover-band">
-  <div class="brand-letterhead">
-    <img class="mark-xl" src="assets/brand/mark.svg" width="60" height="60" alt="">
-    <div class="word"><span class="w-next">Next</span><span class="w-fluent">Fluent</span></div>
-    <div class="rule-row"><span class="rule"></span><span class="tagline">Inglês sem Fronteiras</span><span class="rule"></span></div>
-    <div class="strapline">Aprenda · Evolua · Conquiste</div>
-  </div>
-  <div class="hero">
-    <div class="hero-copy">
-      <div class="eyebrow">Documento de viagem nº 001 · CEFR A1–C2</div>
-      <h1>Seu passaporte para o inglês<br><em>fluente</em></h1>
-      <p class="lead">Do iniciante absoluto à proficiência total, em 6 níveis internacionais (o topo oficial da escala CEFR), mais um módulo extra de inglês para o mercado de trabalho. Explicações em português, prática em inglês. E sim: 100% gratuito, sem pegadinha.</p>
-      <div class="cta-row">
-        <a class="seal-btn solid" href="niveis/A1-iniciante/00-visao-geral.html">Começar pelo A1 →</a>
-        <a class="seal-btn outline" href="README.html">Ler o guia completo</a>
-        <a class="seal-btn outline" href="GUIA-DE-ESTUDOS.html">Guia de estudos</a>
-      </div>
-      <p class="account-hint" id="account-hint"><a href="cadastro.html">Crie sua conta grátis</a> para acessar as aulas, salvar seu progresso entre aparelhos e liberar o certificado.</p>
-    </div>
-    <div class="hero-preview">
-      <div class="preview-frame" aria-hidden="true">
-        <div class="preview-bar">
-          <span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span>
-          <span class="preview-url">nextfluent · aula em andamento</span>
+<main class="page">
+  <div class="auth-wrap">
+
+    <div class="auth-card" id="signup-card">
+      <div class="eyebrow" style="color:var(--gold-strong); margin-bottom:10px">Área do aluno</div>
+      <h1>Crie sua conta</h1>
+      <p class="lead">Cadastre-se para acessar o curso, salvar seu progresso e liberar o certificado de conclusão.</p>
+
+      <div class="auth-error" id="auth-error"></div>
+
+      <form id="signup-form" novalidate>
+        <div class="auth-field">
+          <label for="f-name">Nome completo</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" required maxlength="80">
+          <small>É o nome que vai aparecer no seu certificado.</small>
         </div>
-        <div class="preview-body">
-          <span class="preview-badge">A1 · Lição 1</span>
-          <h4>Saudações e o verbo <em>to be</em></h4>
-          <div class="preview-row"><span class="preview-en">I <strong>am</strong> a student.</span><span class="preview-pt">Eu sou estudante.</span></div>
-          <div class="preview-row"><span class="preview-en">She <strong>is</strong> from Brazil.</span><span class="preview-pt">Ela é do Brasil.</span></div>
-          <div class="preview-row"><span class="preview-en">We <strong>are</strong> ready.</span><span class="preview-pt">Nós estamos prontos.</span></div>
-          <div class="preview-complete">✓ Aula concluída</div>
+        <div class="auth-field">
+          <label for="f-email">E-mail</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" required>
         </div>
+        <div class="auth-field">
+          <label for="f-phone">Telefone (WhatsApp)</label>
+          <input type="tel" id="f-phone" name="phone" autocomplete="tel" required placeholder="(11) 91234-5678">
+        </div>
+        <div class="auth-field">
+          <label for="f-password">Senha</label>
+          <input type="password" id="f-password" name="password" autocomplete="new-password" required minlength="6">
+          <small>Pelo menos 6 caracteres.</small>
+        </div>
+        <div class="auth-field">
+          <label for="f-password2">Confirmar senha</label>
+          <input type="password" id="f-password2" name="password2" autocomplete="new-password" required minlength="6">
+        </div>
+        <button type="submit" class="seal-btn solid auth-submit" id="signup-submit">Criar minha conta →</button>
+      </form>
+
+      <div class="auth-switch">Já tem conta? <a href="login.html" id="login-link">Entrar</a></div>
+      <div class="auth-switch"><a href="vendas.html">Conheça o curso antes de se cadastrar</a></div>
+
+      <div class="auth-note" id="not-configured-note" hidden>
+        A área de cadastro deste curso ainda está sendo configurada pelo administrador.
+        Enquanto isso, seu progresso continua sendo salvo automaticamente neste navegador.
+        <a href="vendas.html">Veja o curso</a> e comece a estudar.
       </div>
-      <svg class="preview-stamp" viewBox="0 0 230 230" aria-hidden="true">
-        <defs>
-          <path id="ringpath" d="M115,26 a89,89 0 1,1 -0.1,0" fill="none"/>
-        </defs>
-        <circle class="stamp-ring" cx="115" cy="115" r="108" fill="none" stroke-width="1.6" stroke-dasharray="3 5"/>
-        <circle class="stamp-ring-soft" cx="115" cy="115" r="89" fill="none" stroke-width="1.2"/>
-        <text class="stamp-arc-text" font-size="11" letter-spacing="3.4">
-          <textPath href="#ringpath" startOffset="1%">NEXTFLUENT • INGLÊS SEM FRONTEIRAS • BRASIL •</textPath>
-        </text>
-        <text class="stamp-center" x="115" y="112" text-anchor="middle" font-weight="700" font-size="34">A1→C2</text>
-        <text class="stamp-sub" x="115" y="136" text-anchor="middle" font-size="10.5" letter-spacing="2.5">APROVADO PARA EMBARQUE</text>
-      </svg>
     </div>
-  </div>
-</div>
 
-<div class="ticket">
-  <div class="ticket-inner">
-    <div class="ticket-field"><div class="k">De</div><div class="v">A1</div></div>
-    <div class="ticket-field"><div class="k">Para</div><div class="v">C2</div></div>
-    <div class="ticket-field"><div class="k">Níveis</div><div class="v">6<small>+1 extra</small></div></div>
-    <div class="ticket-field"><div class="k">Lições</div><div class="v" id="ticket-lessons-count">62</div></div>
-    <div class="ticket-field"><div class="k">Idioma</div><div class="v" style="font-size:17px">PT → EN</div></div>
-  </div>
-</div>
+    <div class="auth-card" id="already-in-card" hidden>
+      <div class="eyebrow" style="color:var(--gold-strong); margin-bottom:10px">Bem-vindo de volta</div>
+      <h1>Você já tem uma conta</h1>
+      <p class="lead" id="already-in-greeting">Continue seus estudos de onde parou.</p>
+      <a class="seal-btn solid auth-submit" href="niveis/A1-iniciante/00-visao-geral.html">Continuar o curso →</a>
+      <div class="auth-switch"><a href="certificado.html">Ver meu certificado</a></div>
+    </div>
 
-<div id="nf-progress"><!-- preenchido por NF.initIndexProgress() --></div>
-
-<section class="section">
-  <div class="section-head center">
-    <div class="eyebrow">Por que o NextFluent</div>
-    <h2>Tudo que um curso pago oferece, sem o preço</h2>
-    <p>Sem trial, sem plano escondido, sem cartão de crédito. É um curso completo, do jeito que a fluência deveria ser: acessível.</p>
   </div>
-  <div class="feature-grid">
-    <div class="feature-card">
-      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.2 12.5 6.5 21l5.5-3 5.5 3-1.7-8.5"/></svg></div>
-      <h3>Certificado ao concluir</h3>
-      <p>Termine as 62 aulas, do A1 ao C2, e baixe seu certificado de conclusão na hora, sem custo extra.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9h17v4h-17z"/><path d="M4.5 13h15v7.5h-15z"/><path d="M12 9v11.5"/><path d="M12 9c-2 0-4-1-4-3s1.4-3 3-2c1.2.7 1.6 2.8 1 5Z"/><path d="M12 9c2 0 4-1 4-3s-1.4-3-3-2c-1.2.7-1.6 2.8-1 5Z"/></svg></div>
-      <h3>100% gratuito, sempre</h3>
-      <p>O curso inteiro está liberado desde o primeiro dia. Sem período de teste que expira, sem plano premium escondido.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 19 6v6c0 5-3 8-7 9.5-4-1.5-7-4.5-7-9.5V6l7-2.5Z"/><path d="M9 12l2 2 4-4.5"/></svg></div>
-      <h3>Sem anúncios</h3>
-      <p>Nenhum anúncio entre as aulas. Seus dados de estudo não são vendidos a ninguém.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="11.5" rx="1.3"/><path d="M2 19.5h20M9.5 19.5V17M14.5 19.5V17"/></svg></div>
-      <h3>Funciona no seu navegador</h3>
-      <p>Sem instalar nada. Abra no computador ou no celular e comece a estudar na hora.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12" rx="1.5"/><path d="M8 7.5V5.8A1.8 1.8 0 0 1 9.8 4h4.4A1.8 1.8 0 0 1 16 5.8V7.5"/><path d="M3 13h18"/><path d="M10.3 13v1.4h3.4V13"/></svg></div>
-      <h3>Inglês para a carreira</h3>
-      <p>Módulo extra com currículo, entrevistas, e-mails, reuniões e LinkedIn: o inglês que o mercado de trabalho cobra.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.3 2.3 3.6 5.4 3.6 8.5s-1.3 6.2-3.6 8.5c-2.3-2.3-3.6-5.4-3.6-8.5S9.7 5.8 12 3.5Z"/></svg></div>
-      <h3>Padrão internacional CEFR</h3>
-      <p>Os 6 níveis seguem a mesma escala usada por escolas de idiomas do mundo inteiro, do A1 ao C2.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="padding-top:0">
-  <div class="section-head">
-    <div class="eyebrow">O método</div>
-    <h2>Como funciona</h2>
-    <p>Sem turma, sem horário marcado. Você estuda quando der, no seu ritmo.</p>
-  </div>
-  <div class="steps">
-    <div class="step">
-      <span class="step-num">01</span>
-      <h3>Escolha seu nível</h3>
-      <p>Comece do zero absoluto no A1, ou pule direto pro nível que já corresponde ao seu inglês hoje.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">02</span>
-      <h3>Estude a lição</h3>
-      <p>Explicação, vocabulário, diálogo modelo, áudio narrado e exercícios com gabarito, tudo na mesma página.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">03</span>
-      <h3>Marque o progresso</h3>
-      <p>Um botão ao final de cada aula guarda o que você já concluiu. Pare e continue quando quiser.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">04</span>
-      <h3>Receba o certificado</h3>
-      <p>Ao completar as 62 aulas, do A1 ao C2, seu certificado de conclusão é liberado na hora.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-head">
-    <div class="eyebrow">Itinerário</div>
-    <h2>Sua rota até a fluência</h2>
-    <p>Cada nível é um carimbo de fronteira: uma tinta diferente, uma etapa vencida. Siga a rota na ordem, do A1 ao C2, o topo oficial da escala CEFR.</p>
-  </div>
-  <div class="route">
-    <a class="stop" href="niveis/A1-iniciante/00-visao-geral.html" style="text-decoration:none" data-level="A1 · Iniciante">
-      <div class="stop-mark" style="--stop-color:var(--stamp-a1)">A1</div>
-      <div class="stop-card" style="--stop-color:var(--stamp-a1)">
-        <div class="code">Iniciante</div>
-        <h3>Primeiros passos</h3>
-        <p>Verbo to be, presente simples, there is/are, can, presente contínuo. Se apresentar e sobreviver ao básico.</p>
-        <div class="stop-progress" data-level-progress></div>
-      </div>
-    </a>
-    <a class="stop" href="niveis/A2-elementar/01-passado-simples.html" style="text-decoration:none" data-level="A2 · Elementar">
-      <div class="stop-mark" style="--stop-color:var(--stamp-a2)">A2</div>
-      <div class="stop-card" style="--stop-color:var(--stamp-a2)">
-        <div class="code">Elementar</div>
-        <h3>Contando o passado, planejando o futuro</h3>
-        <p>Passado simples e contínuo, will/going to, modais, quantificadores, phrasal verbs básicos.</p>
-        <div class="stop-progress" data-level-progress></div>
-      </div>
-    </a>
-    <a class="stop" href="niveis/B1-intermediario/01-present-perfect.html" style="text-decoration:none" data-level="B1 · Intermediário">
-      <div class="stop-mark" style="--stop-color:var(--stamp-b1)">B1</div>
-      <div class="stop-card" style="--stop-color:var(--stamp-b1)">
-        <div class="code">Intermediário</div>
-        <h3>Experiências e opiniões</h3>
-        <p>Present perfect, condicionais 1 e 2, voz passiva, discurso indireto, modais de dedução.</p>
-        <div class="stop-progress" data-level-progress></div>
-      </div>
-    </a>
-    <a class="stop" href="niveis/B2-intermediario-superior/01-condicionais-3-mistos.html" style="text-decoration:none" data-level="B2 · Intermediário Superior">
-      <div class="stop-mark" style="--stop-color:var(--stamp-b2)">B2</div>
-      <div class="stop-card" style="--stop-color:var(--stamp-b2)">
-        <div class="code">Intermediário superior</div>
-        <h3>Hipóteses e nuances</h3>
-        <p>Condicionais 3 e mistas, tempos perfeitos contínuos, orações relativas, collocations.</p>
-        <div class="stop-progress" data-level-progress></div>
-      </div>
-    </a>
-    <a class="stop" href="niveis/C1-avancado/01-inversao-enfase.html" style="text-decoration:none" data-level="C1 · Avançado">
-      <div class="stop-mark" style="--stop-color:var(--stamp-c1)">C1</div>
-      <div class="stop-card" style="--stop-color:var(--stamp-c1)">
-        <div class="code">Avançado</div>
-        <h3>Fluência e naturalidade</h3>
-        <p>Inversão, subjuntivo, nuances de vocabulário, hedging language, preparação para TOEFL/IELTS.</p>
-        <div class="stop-progress" data-level-progress></div>
-      </div>
-    </a>
-    <a class="stop stop-final" href="niveis/C2-proficiencia/00-visao-geral.html" style="text-decoration:none" data-level="C2 · Proficiência">
-      <div class="stop-mark" style="--stop-color:var(--stamp-c2)">C2</div>
-      <div class="stop-card" style="--stop-color:var(--stamp-c2)">
-        <div class="code">Proficiência · topo do CEFR</div>
-        <h3>Domínio total</h3>
-        <p>Retórica, humor e ironia, variedades do inglês, coesão avançada, nuance e tradução literária: nível de falante nativo culto. Não existe nível acima do C2.</p>
-        <div class="stop-progress" data-level-progress></div>
-      </div>
-    </a>
-  </div>
-</section>
-
-<section class="section" style="padding-top:0">
-  <div class="section-head">
-    <div class="eyebrow">Visto à parte</div>
-    <h2>Um selo bônus, fora da rota principal</h2>
-    <p>Este não é um degrau da escala CEFR. É um módulo paralelo, prático, que você pode tirar a qualquer momento a partir do B1, sem esperar chegar ao C2.</p>
-  </div>
-  <a class="bonus-stamp" href="ingles-mercado-de-trabalho/00-visao-geral.html" data-level="Inglês para o Mercado de Trabalho">
-    <div class="bonus-stamp-mark" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 5.5v13M5.5 12h13" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
-    </div>
-    <div class="bonus-stamp-body">
-      <div class="code">Selo bônus · a partir do B1, em paralelo</div>
-      <h3>Inglês para o Mercado de Trabalho</h3>
-      <p>Currículo, entrevistas, e-mails, reuniões, negociação, LinkedIn: o inglês do dia a dia profissional.</p>
-      <div class="stop-progress" data-level-progress></div>
-    </div>
-    <div class="bonus-stamp-arrow">→</div>
-  </a>
-</section>
-
-<section class="section" style="padding-top:0">
-  <div class="section-head">
-    <div class="eyebrow">Antes de embarcar</div>
-    <h2>Documentos necessários</h2>
-    <p>Materiais de apoio para consultar durante toda a viagem, em qualquer nível.</p>
-  </div>
-  <div class="doclist">
-    <a class="doc" href="recursos/glossario-gramatical.html">
-      <span class="check">✓</span>
-      <span><span class="name">Glossário gramatical</span><br><span class="desc">Termos gramaticais explicados em português</span></span>
-    </a>
-    <a class="doc" href="recursos/verbos-irregulares.html">
-      <span class="check">✓</span>
-      <span><span class="name">Verbos irregulares</span><br><span class="desc">Lista completa com tradução</span></span>
-    </a>
-    <a class="doc" href="recursos/falsos-cognatos.html">
-      <span class="check">✓</span>
-      <span><span class="name">Falsos cognatos</span><br><span class="desc">Palavras "pegadinha" entre PT e EN</span></span>
-    </a>
-    <a class="doc" href="recursos/recursos-complementares.html">
-      <span class="check">✓</span>
-      <span><span class="name">Recursos complementares</span><br><span class="desc">Apps, podcasts, filmes e exames</span></span>
-    </a>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-head center">
-    <div class="eyebrow">Perguntas frequentes</div>
-    <h2>Antes de começar</h2>
-  </div>
-  <div class="faq-list">
-    <details class="faq-item">
-      <summary>O curso é mesmo 100% grátis?</summary>
-      <div class="faq-body">Sim. Todas as 62 aulas, do A1 ao C2, mais o módulo de inglês para o mercado de trabalho, estão liberadas desde o primeiro dia, sem período de teste, sem plano pago escondido.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Preciso criar conta para estudar?</summary>
-      <div class="faq-body">Sim, é rápido e continua grátis: crie sua conta para abrir qualquer aula. É o que garante que seu progresso e seu certificado fiquem salvos com você e sincronizados entre aparelhos.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Preciso instalar alguma coisa?</summary>
-      <div class="faq-body">Não. O curso roda direto no navegador, no computador ou no celular. É só abrir e estudar.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Não sei nada de inglês. Consigo começar?</summary>
-      <div class="faq-body">Sim, o nível A1 parte do zero absoluto: alfabeto, saudações, pronomes e o verbo <em>to be</em>.</div>
-    </details>
-    <details class="faq-item">
-      <summary>O certificado tem validade oficial, tipo TOEFL ou IELTS?</summary>
-      <div class="faq-body">Não é uma certificação internacional como TOEFL ou IELTS. É um certificado de conclusão do curso NextFluent, que mostra que você estudou e concluiu as 62 aulas, do A1 ao C2.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Tem aula ao vivo ou professor por vídeo?</summary>
-      <div class="faq-body">Não. O NextFluent é um curso no seu próprio ritmo, em texto, com áudio narrado, vocabulário, diálogos e exercícios com gabarito em cada lição. Sem horário marcado, sem pressão.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Funciona sem internet?</summary>
-      <div class="faq-body">Você precisa de internet para entrar na sua conta e abrir cada aula pela primeira vez. Depois disso, a leitura em si funciona mesmo com a conexão instável.</div>
-    </details>
-  </div>
-</section>
-
-<div class="cta-banner">
-  <h2>Pronto pra começar sua jornada?</h2>
-  <p>Seis níveis, sessenta e duas aulas, um certificado no final. O primeiro passo é grátis, e o resto também.</p>
-  <div class="cta-row">
-    <a class="seal-btn solid" href="niveis/A1-iniciante/00-visao-geral.html">Começar pelo A1 →</a>
-    <a class="seal-btn outline" href="cadastro.html">Criar conta grátis</a>
-  </div>
-</div>
+</main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand"><img src="assets/brand/mark.svg" alt=""><span>NextFluent</span></div>
-        <p class="footer-about">Curso gratuito de inglês em português, do A1 ao C2 (o topo oficial da escala CEFR), mais um módulo de inglês para o mercado de trabalho.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Curso</h4>
-        <ul>
-          <li><a href="niveis/A1-iniciante/00-visao-geral.html">Começar pelo A1</a></li>
-          <li><a href="ingles-mercado-de-trabalho/00-visao-geral.html">Inglês para o mercado de trabalho</a></li>
-          <li><a href="certificado.html">Certificado</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Guias</h4>
-        <ul>
-          <li><a href="README.html">Guia completo</a></li>
-          <li><a href="GUIA-DE-ESTUDOS.html">Guia de estudos</a></li>
-          <li><a href="recursos/recursos-complementares.html">Recursos complementares</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Conta</h4>
-        <ul>
-          <li><a href="cadastro.html">Criar conta</a></li>
-          <li><a href="login.html">Entrar</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>NextFluent · Inglês sem Fronteiras</span>
-      <span>Curso gratuito · sem anúncios</span>
+    <div style="font-weight:700; margin-bottom:12px">NextFluent · Inglês sem Fronteiras</div>
+    <div class="links">
+      <a href="vendas.html">Conheça o curso</a>
+      <a href="README.html">Guia completo</a>
+      <a href="certificado.html">Certificado</a>
     </div>
   </div>
 </footer>
@@ -369,24 +104,57 @@
 <script src="assets/lessons-data.js"></script>
 <script src="assets/progress.js"></script>
 <script>
-  NF.initIndexProgress();
-  document.getElementById("ticket-lessons-count").textContent = NF.totalCount();
-  function refreshLevels() {
-    document.querySelectorAll("[data-level]").forEach(function (el) {
-      var row = NF.levelBreakdown().find(function (r) { return r.level === el.getAttribute("data-level"); });
-      var mount = el.querySelector("[data-level-progress]");
-      if (row && mount) mount.textContent = row.done + "/" + row.total + " concluídas";
-    });
-  }
-  refreshLevels();
-  document.addEventListener("nextfluent:progress-changed", refreshLevels);
+  (function () {
+    if (!window.NFAuth || !window.NFAuth.isConfigured()) {
+      document.getElementById("not-configured-note").hidden = false;
+      document.getElementById("signup-form").hidden = true;
+      document.querySelectorAll("#signup-card .auth-switch").forEach(function (el) { el.hidden = true; });
+      return;
+    }
 
-  var accountHint = document.getElementById("account-hint");
-  if (window.NFAuth && window.NFAuth.isConfigured()) {
+    var signupCard = document.getElementById("signup-card");
+    var alreadyInCard = document.getElementById("already-in-card");
+
     window.NFAuth.onChange(function (user) {
-      accountHint.hidden = !!user;
+      signupCard.hidden = !!user;
+      alreadyInCard.hidden = !user;
+      if (user) {
+        var name = (user.displayName || "").trim().split(" ")[0];
+        document.getElementById("already-in-greeting").textContent = name
+          ? "Continue seus estudos de onde parou, " + name + "."
+          : "Continue seus estudos de onde parou.";
+      }
     });
-  }
+
+    var errorBox = document.getElementById("auth-error");
+    var submitBtn = document.getElementById("signup-submit");
+
+    document.getElementById("signup-form").addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      errorBox.textContent = "";
+      var name = document.getElementById("f-name").value.trim();
+      var email = document.getElementById("f-email").value.trim();
+      var phone = document.getElementById("f-phone").value.trim();
+      var pass = document.getElementById("f-password").value;
+      var pass2 = document.getElementById("f-password2").value;
+
+      if (!name) { errorBox.textContent = "Digite seu nome completo."; return; }
+      if (!phone) { errorBox.textContent = "Digite seu telefone."; return; }
+      if (pass.length < 6) { errorBox.textContent = "A senha precisa ter pelo menos 6 caracteres."; return; }
+      if (pass !== pass2) { errorBox.textContent = "As senhas não são iguais."; return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Criando conta…";
+      window.NFAuth.signUp(name, email, pass, phone)
+        .catch(function (err) {
+          errorBox.textContent = err.message;
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Criar minha conta →";
+        });
+    });
+  })();
 </script>
 </body>
 </html>
