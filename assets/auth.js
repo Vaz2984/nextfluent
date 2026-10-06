@@ -186,6 +186,28 @@
       });
   }
 
+  /** Busca o status de assinatura do aluno logado (tabela subscriptions,
+   * só leitura pro navegador — ver supabase-schema.sql). Sem pagamento
+   * confirmado ainda, não existe linha: devolve status "inactive" por
+   * padrão, não null, pra quem usa isso não precisar tratar dois casos. */
+  function getSubscriptionStatus(uid) {
+    if (!configured) return Promise.resolve({ status: "inactive" });
+    return client
+      .from("subscriptions")
+      .select("*")
+      .eq("student_id", uid)
+      .maybeSingle()
+      .then(function (res) {
+        if (res.error) throw res.error;
+        if (!res.data) return { status: "inactive" };
+        return {
+          status: res.data.status || "inactive",
+          plan: res.data.plan || null,
+          currentPeriodEnd: res.data.current_period_end || null,
+        };
+      });
+  }
+
   // --- cadastro / login / logout ------------------------------------------
 
   function signUp(name, email, password, phone) {
@@ -322,6 +344,7 @@
     getStudentRecord: getStudentRecord,
     upsertStudentRecord: upsertStudentRecord,
     listAllStudents: listAllStudents,
+    getSubscriptionStatus: getSubscriptionStatus,
   };
 
   if (document.readyState === "loading") {

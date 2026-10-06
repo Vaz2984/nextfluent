@@ -56,3 +56,36 @@ create policy "admin updates all" on public.students
 drop policy if exists "admin deletes" on public.students;
 create policy "admin deletes" on public.students
   for delete using (auth.jwt() ->> 'email' in ('mgvz11232@gmail.com'));
+
+-- Assinatura (pagamento mensal via Mercado Pago). Fica numa tabela
+-- separada da students de propósito: o aluno só pode LER o próprio
+-- status aqui, nunca escrever nela (diferente de students, onde ele
+-- escreve o próprio progresso). Quem marca uma assinatura como
+-- "active" é o webhook do Mercado Pago, chamando a API do Supabase
+-- com a chave service_role (que ignora RLS) — nunca o navegador do
+-- aluno. Isso impede alguém de abrir o console do navegador e se
+-- marcar como pago sem ter pago de verdade.
+create table if not exists public.subscriptions (
+  student_id uuid primary key references auth.users(id) on delete cascade,
+  status text not null default 'inactive',
+  plan text,
+  mp_subscription_id text,
+  mp_payer_email text,
+  current_period_end timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table public.subscriptions enable row level security;
+
+-- Cada aluno só lê o próprio status (nenhuma política de insert/update
+-- é criada pra authenticated — por padrão, sem política, o RLS nega
+-- escrita. Só o service_role, que ignora RLS, escreve aqui).
+drop policy if exists "subscriptions read own" on public.subscriptions;
+create policy "subscriptions read own" on public.subscriptions
+  for select using (auth.uid() = student_id);
+
+-- Admin: vê a assinatura de todo mundo no painel admin.html.
+drop policy if exists "admin reads all subscriptions" on public.subscriptions;
+create policy "admin reads all subscriptions" on public.subscriptions
+  for select using (auth.jwt() ->> 'email' in ('mgvz11232@gmail.com'));
