@@ -129,6 +129,9 @@
       certificateDate: row.certificate_date || null,
       createdAt: row.created_at || null,
       lastActive: row.last_active || null,
+      currentStreak: row.current_streak || 0,
+      longestStreak: row.longest_streak || 0,
+      lastStreakDate: row.last_streak_date || null,
     };
   }
 
@@ -142,6 +145,9 @@
     if ("totalLessons" in patch) row.total_lessons = patch.totalLessons;
     if ("certificateDate" in patch) row.certificate_date = patch.certificateDate;
     if ("createdAt" in patch) row.created_at = patch.createdAt;
+    if ("currentStreak" in patch) row.current_streak = patch.currentStreak;
+    if ("longestStreak" in patch) row.longest_streak = patch.longestStreak;
+    if ("lastStreakDate" in patch) row.last_streak_date = patch.lastStreakDate;
     row.last_active = new Date().toISOString();
     return row;
   }

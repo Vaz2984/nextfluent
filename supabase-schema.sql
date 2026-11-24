@@ -20,12 +20,20 @@ create table if not exists public.students (
   total_lessons integer not null default 0,
   certificate_date text,
   created_at timestamptz not null default now(),
-  last_active timestamptz not null default now()
+  last_active timestamptz not null default now(),
+  current_streak integer not null default 0,
+  longest_streak integer not null default 0,
+  last_streak_date date,
+  last_reminder_sent_at timestamptz
 );
 
 -- Se a tabela já existia (de uma versão anterior deste arquivo) sem a
--- coluna phone, este comando adiciona ela sem apagar dados.
+-- coluna phone/streak, estes comandos adicionam elas sem apagar dados.
 alter table public.students add column if not exists phone text not null default '';
+alter table public.students add column if not exists current_streak integer not null default 0;
+alter table public.students add column if not exists longest_streak integer not null default 0;
+alter table public.students add column if not exists last_streak_date date;
+alter table public.students add column if not exists last_reminder_sent_at timestamptz;
 
 alter table public.students enable row level security;
 

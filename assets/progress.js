@@ -126,6 +126,45 @@
     return cloudEnabled() ? window.NFAuth.getCurrentUser() : null;
   }
 
+  // --- streak (dias seguidos de acesso) -----------------------------------
+  // Só é contado pra quem está logado (precisa de conta pra ter um e-mail
+  // pra avisar, então não faz sentido rastrear em modo 100% local).
+
+  var cachedStreak = null; // { current, longest } — preenchido por syncOnLogin
+
+  function todayStr() {
+    var d = new Date();
+    var pad = function (n) { return n < 10 ? "0" + n : "" + n; };
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  }
+
+  function daysBetween(fromStr, toStr) {
+    var a = new Date(fromStr + "T00:00:00");
+    var b = new Date(toStr + "T00:00:00");
+    return Math.round((b - a) / 86400000);
+  }
+
+  /** A partir do registro salvo na nuvem, decide se o streak deve mudar
+   * hoje. Devolve null se o acesso de hoje já tinha sido contado (evita
+   * reescrever a cada carregamento de página no mesmo dia). */
+  function computeStreakUpdate(record) {
+    var today = todayStr();
+    var last = (record && record.lastStreakDate) || null;
+    if (last === today) return null;
+
+    var current = (record && record.currentStreak) || 0;
+    var longest = (record && record.longestStreak) || 0;
+    current = last && daysBetween(last, today) === 1 ? current + 1 : 1;
+    if (current > longest) longest = current;
+    return { currentStreak: current, longestStreak: longest, lastStreakDate: today };
+  }
+
+  /** { current, longest } do aluno logado, ou null se ainda não disponível
+   * (cadastro não configurado, ninguém logado, ou sync ainda em curso). */
+  function getStreak() {
+    return cachedStreak;
+  }
+
   /** Manda pra nuvem o progresso local atual inteiro (usado a cada aula
    * marcada/desmarcada, ao logar, e ao completar/reiniciar o curso). O
    * documento inteiro é pequeno (só os ids das 62 aulas), então não há
@@ -175,6 +214,13 @@
           name: (record && record.name) || user.displayName || "",
         };
         if (!record) extra.createdAt = new Date().toISOString();
+
+        var streakPatch = computeStreakUpdate(record);
+        cachedStreak = streakPatch
+          ? { current: streakPatch.currentStreak, longest: streakPatch.longestStreak }
+          : { current: (record && record.currentStreak) || 0, longest: (record && record.longestStreak) || 0 };
+        if (streakPatch) Object.assign(extra, streakPatch);
+
         pushFullProgress(extra);
 
         document.dispatchEvent(new CustomEvent("nextfluent:progress-changed"));
@@ -534,6 +580,7 @@
     resetProgress: resetProgress,
     findNextLesson: findNextLesson,
     levelBreakdown: levelBreakdown,
+    getStreak: getStreak,
     initLessonButton: initLessonButton,
     initIndexProgress: initIndexProgress,
     initCertificatePage: initCertificatePage,

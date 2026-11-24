@@ -62,11 +62,11 @@
     }
 
     function downloadCsv(rows) {
-      var header = ["Nome", "E-mail", "Telefone", "Cadastro em", "Aulas concluídas", "Total de aulas", "Progresso (%)", "Certificado em"];
+      var header = ["Nome", "E-mail", "Telefone", "Cadastro em", "Aulas concluídas", "Total de aulas", "Progresso (%)", "Certificado em", "Sequência (dias)", "Último acesso"];
       var lines = [header.map(csvEscape).join(";")];
       rows.forEach(function (r) {
         lines.push(
-          [r.name, r.email, r.phone, r.createdAtLabel, r.completedCount, r.totalLessons, r.pct, r.certLabel]
+          [r.name, r.email, r.phone, r.createdAtLabel, r.completedCount, r.totalLessons, r.pct, r.certLabel, r.currentStreak, r.lastActiveLabel]
             .map(csvEscape)
             .join(";")
         );
@@ -97,11 +97,19 @@
         "para ativar o cadastro de alunos e este painel (veja as instruções nos comentários desse arquivo).</p></div>";
     }
 
+    function daysSince(ts) {
+      if (!ts) return null;
+      var d = new Date(ts);
+      if (isNaN(d.getTime())) return null;
+      return Math.floor((Date.now() - d.getTime()) / 86400000);
+    }
+
     function renderTable(students) {
       var rows = students.map(function (s) {
         var total = s.totalLessons || 0;
         var done = s.completedCount || 0;
         var pct = total > 0 ? Math.round((done / total) * 100) : 0;
+        var inactiveDays = daysSince(s.lastActive);
         return {
           name: s.name || "(sem nome)",
           email: s.email || "",
@@ -111,6 +119,9 @@
           totalLessons: total,
           pct: pct,
           certLabel: s.certificateDate ? s.certificateDate : "",
+          currentStreak: s.currentStreak || 0,
+          lastActiveLabel: formatDate(s.lastActive),
+          inactiveDays: inactiveDays,
         };
       });
 
@@ -123,6 +134,11 @@
       var rowsHtml = rows
         .sort(function (a, b) { return b.pct - a.pct; })
         .map(function (r) {
+          var inactiveFlag =
+            r.inactiveDays !== null && r.inactiveDays >= 7
+              ? ' <span style="color:var(--danger, #c0392b); font-weight:700">⚠ ' + r.inactiveDays + "d</span>"
+              : "";
+          var streakLabel = r.currentStreak > 0 ? "🔥 " + r.currentStreak : "-";
           return (
             "<tr><td>" +
             escapeHtml(r.name) +
@@ -142,6 +158,11 @@
             r.pct +
             "%)</td><td>" +
             (r.certLabel ? escapeHtml(r.certLabel) : "-") +
+            "</td><td>" +
+            streakLabel +
+            "</td><td>" +
+            escapeHtml(r.lastActiveLabel) +
+            inactiveFlag +
             "</td></tr>"
           );
         })
@@ -156,9 +177,9 @@
         '<div class="admin-toolbar"><h2 style="margin:0; font-family:var(--font-display)">Alunos</h2>' +
         '<button type="button" class="seal-btn outline-ink" id="csv-btn">Baixar CSV →</button></div>' +
         '<div class="admin-table-wrap"><table class="admin-table"><thead><tr>' +
-        "<th>Nome</th><th>E-mail</th><th>Telefone</th><th>Cadastro</th><th>Progresso</th><th>Certificado</th>" +
+        "<th>Nome</th><th>E-mail</th><th>Telefone</th><th>Cadastro</th><th>Progresso</th><th>Certificado</th><th>Sequência</th><th>Último acesso</th>" +
         "</tr></thead><tbody>" +
-        (rowsHtml || '<tr><td colspan="6" style="color:var(--muted)">Ninguém se cadastrou ainda.</td></tr>') +
+        (rowsHtml || '<tr><td colspan="8" style="color:var(--muted)">Ninguém se cadastrou ainda.</td></tr>') +
         "</tbody></table></div>";
 
       var csvBtn = document.getElementById("csv-btn");

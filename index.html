@@ -67,12 +67,11 @@
       </form>
 
       <div class="auth-switch">Já tem conta? <a href="login.html" id="login-link">Entrar</a></div>
-      <div class="auth-switch"><a href="vendas.html">Conheça o curso antes de se cadastrar</a></div>
 
       <div class="auth-note" id="not-configured-note" hidden>
         A área de cadastro deste curso ainda está sendo configurada pelo administrador.
         Enquanto isso, seu progresso continua sendo salvo automaticamente neste navegador.
-        <a href="vendas.html">Veja o curso</a> e comece a estudar.
+        <a href="niveis/A1-iniciante/00-visao-geral.html">Veja o curso</a> e comece a estudar.
       </div>
     </div>
 
@@ -91,7 +90,6 @@
   <div class="wrap">
     <div style="font-weight:700; margin-bottom:12px">NextFluent · Inglês sem Fronteiras</div>
     <div class="links">
-      <a href="vendas.html">Conheça o curso</a>
       <a href="README.html">Guia completo</a>
       <a href="certificado.html">Certificado</a>
     </div>
@@ -115,15 +113,25 @@
     var signupCard = document.getElementById("signup-card");
     var alreadyInCard = document.getElementById("already-in-card");
 
+    function renderGreeting(user) {
+      var name = (user.displayName || "").trim().split(" ")[0];
+      var base = name ? "Continue seus estudos de onde parou, " + name + "." : "Continue seus estudos de onde parou.";
+      var streak = window.NF && window.NF.getStreak ? window.NF.getStreak() : null;
+      if (streak && streak.current > 1) base += " 🔥 " + streak.current + " dias seguidos!";
+      document.getElementById("already-in-greeting").textContent = base;
+    }
+
     window.NFAuth.onChange(function (user) {
       signupCard.hidden = !!user;
       alreadyInCard.hidden = !user;
-      if (user) {
-        var name = (user.displayName || "").trim().split(" ")[0];
-        document.getElementById("already-in-greeting").textContent = name
-          ? "Continue seus estudos de onde parou, " + name + "."
-          : "Continue seus estudos de onde parou.";
-      }
+      if (user) renderGreeting(user);
+    });
+
+    // o streak só fica pronto depois que progress.js termina de sincronizar
+    // com a nuvem (assíncrono) — atualiza o texto de novo quando isso acontece.
+    document.addEventListener("nextfluent:progress-changed", function () {
+      var user = window.NFAuth.getCurrentUser();
+      if (user) renderGreeting(user);
     });
 
     var errorBox = document.getElementById("auth-error");
